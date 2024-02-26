@@ -1,0 +1,23 @@
+#include <iostream>
+
+int main()
+{
+    std::cout << "Please pick a choice: \n";
+    std::cout << "0. Quit\n1. Play Game\n";
+
+    int choice;
+    std::cin >> choice;
+
+    switch (choice)
+    {
+    case 0:
+        std::cout << "Thanks for playing";
+        return 0;
+    case 1:
+        std::cout << "You're playing\n";
+        return 0;
+    default:
+        std::cout << "Invalid choice\n";
+        return 1;
+    }
+}
