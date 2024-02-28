@@ -1,10 +1,11 @@
 #include "Events.h"
+#include "Chance_Values.h"
 
-int normal = 6; //0-5 nothing for random event
-int bear = 8; //6-7 bear
+//int normal = 6; //0-5 nothing for random event
+//int bear = 8; //6-7 bear
 //storm is if not below those two events
-int bear_damage = -25;
-int storm_damage = -25;
+//int bear_damage = -25;
+//int storm_damage = -25;
 
 
 /*
