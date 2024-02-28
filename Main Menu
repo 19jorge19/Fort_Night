@@ -1,6 +1,6 @@
 #include <iostream>
 
-int main()
+int main_menu()
 {
     std::cout << "Please pick a choice: \n";
     std::cout << "0. Quit\n1. Play Game\n";
