@@ -1,5 +1,5 @@
-//global header file, to be imported into every header file, named Global.h
-//includes global variables of health thirst and hunger
+//  Global header file, to be imported into every header file, named Global.h
+//  includes global variables of health thirst and hunger
 
 #pragma once
 
