@@ -7,7 +7,12 @@
 void modifyhealth(int factor) {
 
 	health += factor;
-	
+	if (health > 100) {
+		health = 100;
+	}
+	if (health < 0) {
+		health = 0;
+	}
 
 }
 
@@ -18,6 +23,12 @@ void modifyhealth(int factor) {
 void modifythirst(int factor) {
 
 	thirst += factor;
+	if (thirst > 100) {
+		thirst = 100;
+	}
+	if (thirst < 0) {
+		thirst = 0;
+	}
 
 }
 
@@ -28,7 +39,12 @@ void modifythirst(int factor) {
 void modifyhunger(int factor) {
 
 	hunger += factor;
-
+	if (hunger > 100) {
+		hunger = 100;
+	}
+	if (hunger < 0) {
+		hunger = 0;
+	}
 }
 
 
