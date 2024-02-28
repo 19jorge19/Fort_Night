@@ -1,15 +1,18 @@
 #include "Global.h"
+#include "Chance_Values.h"
 
 int health = 100;
 int thirst = 100;
 int hunger = 100;
 int days = 14;
+/*
 double food_chance = 0.5;
 double water_chance = 0.5;
 int hungry_damage = -5;
 int thirsty_damage = -7;
 int daily_hunger = 5;
 int daily_thirst = 5;
+*/
 
 int main() {
 
