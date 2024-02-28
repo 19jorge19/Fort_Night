@@ -1,23 +1,29 @@
-#include <iostream>
+#include <stdio.h>
 
 int main_menu()
 {
-    std::cout << "Please pick a choice: \n";
-    std::cout << "0. Quit\n1. Play Game\n";
+    printf("Please pick a choice: \n");
+    printf("0. Quit\n1. Play Game\n");
 
     int choice;
-    std::cin >> choice;
+    scanf("%d", &choice);
 
     switch (choice)
     {
     case 0:
-        std::cout << "Thanks for playing";
+        printf("Thanks for playing\n");
         return 0;
     case 1:
-        std::cout << "You're playing\n";
+        printf("You're playing\n");
         return 0;
     default:
-        std::cout << "Invalid choice\n";
+        printf("Invalid choice\n");
         return 1;
     }
+}
+
+int main()
+{
+    main_menu();
+    return 0;
 }
