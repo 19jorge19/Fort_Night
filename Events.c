@@ -1,11 +1,10 @@
 #include "Events.h"
-#include "Chance_Values.h"
 
-//int normal = 6; //0-5 nothing for random event
-//int bear = 8; //6-7 bear
+int normal = 6; //0-5 nothing for random event
+int bear_chance = 8; //6-7 bear
 //storm is if not below those two events
 //int bear_damage = -25;
-//int storm_damage = -25;
+int storm_damage = -25;
 
 
 /*
@@ -16,6 +15,7 @@
 void morning_event() {
 	int decision;
 
+	//print statuses
 	printf("Health: %d\n", health);
 	printf("Hunger: %d\n", hunger);
 	printf("Thirst: %d\n\n", thirst);
@@ -63,14 +63,12 @@ void morning_event() {
 */
 void find_food(int random_event) {
 	//if random number is in the bear range, 6-7, bear attack
-	if (random_event >= normal && random_event < bear) {
+	if (random_event >= normal && random_event < bear_chance) {
 		//bear attack
-		printf("While out searching for food, you ran into a bear!\n");
-		printf("Health decreased by: %d\n", abs(bear_damage));
-		modifyhealth(bear_damage);
+		bear();
 	}
 	//if random number is in the storm range, 8-9, storm
-	else if (random_event >= bear) {
+	else if (random_event >= bear_chance) {
 		//storm
 		printf("While out searching for food, you ran into a storm!\n");
 		printf("Health decreased by: %d\n", abs(storm_damage));
@@ -82,7 +80,7 @@ void find_food(int random_event) {
 		//normal case
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 
-		if (r < food_chance) {
+		if (r <= food_chance) {
 			printf("Congratualations!\nYou have successfully found food!\n");
 			modifyhunger(10);
 			//additionally can modify food chance to decrease
@@ -100,9 +98,7 @@ void find_water(int random_event) {
 	//if random number is in the bear range, 6-7, bear attack
 	if (random_event >= normal && random_event < bear) {
 		//bear attack
-		printf("While out searching for water, you ran into a bear!\n");
-		printf("Health decreased by: %d\n", abs(bear_damage));
-		modifyhealth(bear_damage);
+		bear();
 	}
 	//if random number is in the storm range, 8-9, storm
 	else if (random_event >= bear) {
@@ -117,7 +113,7 @@ void find_water(int random_event) {
 		//normal case
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 
-		if (r < water_chance) {
+		if (r <= water_chance) {
 			printf("Congratualations!\nYou have successfully found water!\n");
 			modifythirst(10);
 			//additionally can modify water chance to decrease
@@ -135,9 +131,7 @@ void stay_in(int random_event) {
 	//if random number is in the bear range, 6-7, bear attack
 	if (random_event >= normal && random_event < bear) {
 		//bear attack
-		printf("Oh no! A bear has found you!\n");
-		printf("Health decreased by: %d\n", abs(bear_damage));
-		modifyhealth(bear_damage);
+		bear();
 	}
 	//if random number is in the storm range, 8-9, storm
 	else if (random_event >= bear) {
@@ -150,3 +144,77 @@ void stay_in(int random_event) {
 	return;
 }
 
+/*
+* Function is called if there is a bear attack
+* gives options to run away, fight, or play dead
+* constants for chances as well as damages for each case located in function
+*/
+void bear() {
+	int choice;
+	printf("Oh no! You ran into a bear!\n");
+	printf("What would you like to do?\n");
+	printf("0: Run away\n");
+	printf("1: Fight it\n");
+	printf("2: Play dead\n");
+
+	scanf("%d", &choice);
+	printf("\n\n");
+
+	//initializing chances of success
+	double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
+	double run_away = 0.3;	//chance of runing away 30%
+	double fight = 0.1;		//chance of beating it in a fight 10%
+	double play_dead = 0.7;  //chance of playing dead and it leaving you alone 70%
+
+	//initializing what you get for each scenario
+	int running_attack = -30;
+	int fight_attack = -50;
+	int play_attack = -10;
+	int bear_food = 30;
+
+
+	if (choice == 0) {
+		if (r <= run_away) {
+			//success
+			printf("Congratualtions!\nYou have successfully ran away from the bear!\n");
+		}
+		else {
+			printf("Oh no!\nThe bear caught you!\n");
+			printf("Health decreased by %d\n", abs(running_attack));
+			modifyhealth(running_attack);
+		}
+	}
+	else if (choice == 1) {
+		if (r <= fight) {
+			//success
+			printf("Congratulations!\nYou have successfully fought off the bear and took some of its food!\n");
+			printf("Food increased by %d", bear_food);
+			modifyhunger(bear_food);
+		}
+		else {
+			printf("Oh no!\nThe bear beat you!\n");
+			printf("Health decreased by %d\n", abs(fight_attack));
+			modifyhealth(fight_attack);
+		}
+	}
+	else if (choice == 2) {
+		if (r <= play_dead) {
+			//success
+			printf("Congratualtions!\nThe bear left you alone.\n");
+		}
+		else {
+			printf("Oh no!\nThe bear still attacked you!\n");
+			printf("Health decreased by %d", abs(play_attack));
+			modifyhealth(play_attack);
+		}
+	}
+	else {
+		printf("Please select a valid choice\n");
+		bear();
+	}
+	return;
+}
+
+void storm(bool home) {
+
+}
