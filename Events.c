@@ -16,23 +16,6 @@
 void morning_event() {
 	int decision;
 
-	//print statusesprintf("       /\\        /\\      \n");
-    printf("      /  \\      /  \\    \n");
-    printf("     /\\   \\    /   /\\   \n");
-    printf("    /      \\__/      \\  \n");
-    printf("   /   /\\    /\\    /\\ \\ \n");
-    printf("  /   /  \\  /  \\  /  \\ \\ \n");
-    printf(" /   /    \\/    \\/    \\ \\ \n");
-    printf("/   /  /\\          /\\  \\ \\ \n");
-    printf("\\  /  /  \\/\\  /\\  /  \\  /\n");
-    printf(" \\/  /       \\/  \\/    \\/ \n");
-    printf("  \\/   /\\    /\\    /\\   \\/\n");
-    printf("   \\  /  \\  /  \\  /  \\  / \n");
-    printf("    \\/    \\/    \\/    \\/  \n");
-    printf("     ||    ||    ||    ||  \n");
-    printf("     ||    ||    ||    ||  \n");
-    printf("     ||    ||    ||    ||  \n");
-    printf("     ||    ||    ||    ||  \n");
 	printf("Health: %d\n", health);
 	printf("Hunger: %d\n", hunger);
 	printf("Thirst: %d\n\n", thirst);
