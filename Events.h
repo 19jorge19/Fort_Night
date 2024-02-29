@@ -12,5 +12,7 @@ void morning_event();
 void find_food(int random_event);
 void find_water(int random_event);
 void stay_in(int random_event);
+void bear();
+void storm(bool home);
 
 #endif
