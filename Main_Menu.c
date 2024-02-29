@@ -20,11 +20,20 @@ void main_menu()
         return;
     case 2:
         //write out instructions
-        printf("instructions here");
+        printf("Welcome to Fort Night the decision makeing survival game.\n");
+        printf("To start playing please select the play option once in\n");
+        printf("You will bw givwn option every morning, evening, and night.\n");
+        printf("Each one of these options will impact your likely hood of.\n");
+        printf("surviving so be careful. Additionally during special event and \n");
+        printf("each senerio will give you additional options on hhow to react.\n");
         main_menu();
     case 3:
         //write out credits
-        printf("credits here");
+        printf("Josh");
+        printf("Dylan");
+        printf("Max");
+        printf("Xavier");
+        printf("Jorge");
         main_menu();
     default:
         printf("Please choose a valid choice.\n");
