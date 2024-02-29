@@ -18,6 +18,24 @@ int main() {
 
 	//call main menu function
 	//give background story
+	printf("Welcome to Fortnight! You have awoken in a forest with no memories, all you know is that you must survive for 14 days before you are rescued. Can you survive?\n\n\n");
+	printf("       /\\        /\\      \n");
+	printf("      /  \\      /  \\    \n");
+	printf("     /\\   \\    /   /\\   \n");
+	printf("    /      \\__/      \\  \n");
+	printf("   /   /\\    /\\    /\\ \\ \n");
+	printf("  /   /  \\  /  \\  /  \\ \\ \n");
+	printf(" /   /    \\/    \\/    \\ \\ \n");
+	printf("/   /  /\\          /\\  \\ \\ \n");
+	printf("\\  /  /  \\/\\  /\\  /  \\  /\n");
+	printf(" \\/  /       \\/  \\/    \\/ \n");
+	printf("  \\/   /\\    /\\    /\\   \\/\n");
+	printf("   \\  /  \\  /  \\  /  \\  / \n");
+	printf("    \\/    \\/    \\/    \\/  \n");
+	printf("     ||    ||    ||    ||  \n");
+	printf("     ||    ||    ||    ||  \n");
+	printf("     ||    ||    ||    ||  \n");
+	printf("     ||    ||    ||    ||  \n");
 	
 	//maybe just do one decision a day, keep it simple
 	for(int i = 1; i<days; i++){
