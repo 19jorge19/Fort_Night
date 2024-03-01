@@ -1,11 +1,21 @@
 #include "Events.h"
+#include "Status_Bars.h"
+#include "Chance_Values.h"
+//#include "SettingChance.c"
 
 int normal = 6; //0-5 nothing for random event
 int bear_chance = 8; //6-7 bear
+
 //storm is if not below those two events
-//int bear_damage = -25;
 int storm_damage = -25;
 
+double food_chance = 0.5;
+double water_chance = 0.5;
+int hungry_damage = -5;
+int thirsty_damage = -7;
+int daily_hunger = 5;
+int daily_thirst = 5;
+int bear_damage = -25;
 
 /*
 * Function displays status bars before prompting user to make a decision for what to do in the morning

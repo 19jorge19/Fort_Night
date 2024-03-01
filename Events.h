@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Global.h"
+#include <stdbool.h>
 
 #ifndef event
 #define event

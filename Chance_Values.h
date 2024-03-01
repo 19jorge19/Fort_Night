@@ -21,8 +21,8 @@ extern int daily_thirst;
 
 //  Random event threshold values (Values are upper thresholds, so < is used)
 extern int normal; //0-5 means no event
-extern int bear; //6-7 is Bear attack
-extern int storm; //8-10 is Storm
+//extern int bear; //6-7 is Bear attack
+//extern int storm; //8-10 is Storm
 
 //  Damage values for certain event
 extern int bear_damage;
