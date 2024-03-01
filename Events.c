@@ -168,7 +168,24 @@ void bear(bool home) {
 	}
 
 	int choice;
-	printf("Oh no! You ran into a bear!\n");
+	printf("Oh no! You ran into a bear!\n\n");
+	 printf(":'._..---.._.'\";\n");
+    	printf("    `.             .'\n");
+   	 printf("    .'    ^   ^    `.\n");
+   	 printf("   :      a   a      :                 __....._\n");
+   	 printf("   :     _.-0-._     :---'\"\"'\"-....--'\"        '.\n");
+   	 printf("    :  .'   :   `.  :                          `,`.\n");
+    	printf("     `.: '--'--' :.'                             ; ;\n");
+    	printf("      : `._`-'_.'                                ;.'\n");
+   	 printf("      `.   '\"'                                   ;\n");
+   	 printf("       `.               '                        ;\n");
+   	 printf("        `.     `        :           `            ;\n");
+   	 printf("         .`.    ;       ;           :           ;\n");
+   	 printf("       .'    `-.'      ;            :          ;`.\n");
+   	 printf("   __.'      .'      .'              :        ;   `.\n");
+   	 printf(" .'      __.'      .'`--..__      _._.'      ;      ;\n");
+   	 printf(" `......'        .'         `'\"\"'`.'        ;......-'\n");
+   	 printf("       `.......-'                 `........'\n\n");
 	printf("What would you like to do?\n");
 	printf("0: Run away\n");
 	printf("1: Fight it\n");
