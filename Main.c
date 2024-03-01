@@ -15,7 +15,8 @@ int main() {
 
 	main_menu();
 
-	printf("Welcome to Fortnight! You have awoken in a forest with no memories, all you know is that you must survive for 14 days before you are rescued. Can you survive?\n\n\n");
+	printf("Welcome to Fortnight! You have awoken in a forest with no memories,");
+	printf("all you know is that you must survive for 14 days before you are rescued. Can you survive?\n\n\n");
 	printf("       /\\        /\\      \n");
 	printf("      /  \\      /  \\    \n");
 	printf("     /\\   \\    /   /\\   \n");
