@@ -66,7 +66,7 @@ int main() {
 	 }
 	
 	//if made it through loop, and health is above 0, user won, print win message and return
-	printf("\n\nCongratulations!\nYou beat Fortnight!\n\n");
+	printf("\n\nCongratulations!\nYou beat Fort Night!\n\n");
 
 	main();
 
