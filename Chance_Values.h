@@ -11,12 +11,12 @@
 #define Chance_values
 
 //  Food and Water Chance
-extern double food_chance;
-extern double water_chance;
-extern int hungry_damage;
-extern int thirsty_damage;
-extern int daily_hunger;
-extern int daily_thirst;
+    extern double food_chance;
+    extern double water_chance;
+    extern int hungry_damage;
+    extern int thirsty_damage;
+    extern int daily_hunger;
+    extern int daily_thirst;
 
 
 //  Random event threshold values (Values are upper thresholds, so < is used)

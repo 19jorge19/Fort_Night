@@ -33,7 +33,7 @@ void morning_event() {
 	//random chance of storm, other unpredictable event
 	int random_event = rand() % 10;
 	//random event = random number 0-9, 0-5 = nothing, 6-7 = bear attack, 8-9 = storm
-	//when adding modes, use multiplier here to scale up hard mode, scale down easy mode
+	//when eventually adding modes, use a multiplier here to scale up for hard mode, and scale down for easy mode
 
 
 	//send into different function if there is a storm or other event 
@@ -50,7 +50,7 @@ void morning_event() {
 		return;
 	}
 	else {
-		printf("Please choose a decision\n");
+		printf("Please choose a valid decision\n");
 		morning_event();
 	}
 
@@ -158,8 +158,10 @@ void stay_in(int random_event) {
 
 /*
 * Function is called if there is a bear attack
-* gives options to run away, fight, or play dead
-* constants for chances as well as damages for each case located in function
+* Gives options to run away, fight, or play dead
+* Constants for chances as well as damages for each case located in function
+* input = true, then at home, and therefore safe from bear
+* input = false, then not at home, and in danger
 */
 void bear(bool home) {
 	if (home) {

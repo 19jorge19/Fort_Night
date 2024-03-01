@@ -21,15 +21,15 @@ void main_menu()
         //write out instructions
         printf("Welcome to Fort Night: the decision making survival game.\n");
         printf("To start playing, select the 'Play' option in the Main Menu.\n");
-        printf("You will be given [one] option every day.\n"); //change to three a day if we change that
-        printf("Each one of these options will impact the likelyhood of\n");
+        printf("You will be given [one] option every day.\n"); //change to three options a day if we decide to change that
+        printf("Each option will impact the likelyhood of\n");
         printf("surviving, so be planful. Additionally, there may be special events that \n");
-        printf("require ou to react in order to survive\nGood Luck!\n\n");
+        printf("require you to react appropriately in order to survive\nGood Luck!\n\n");
         main_menu();
     case 3:
         //write out credits
         printf("Developers:\n");
-        printf("Dylan\nJorge\nJosh\nMax\nXavier\n\n");
+        printf("Dylan Mingo\nJorge Torres\nJosh Nordan\nMax Gamble\nXavier Mejia\n\n");
         main_menu();
     default:
         printf("Please input a valid choice.\n");
