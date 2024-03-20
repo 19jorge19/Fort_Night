@@ -1,7 +1,8 @@
 #include "Events.h"
 
-int normal = 6; //0-5 nothing for random event
-int bear_chance = 8; //6-7 bear
+int normal = 0; //0-5 nothing for random event
+int bear_chance = 1; //6-7 bear
+int storm_chance = 2;
 //storm is if not below those two events
 //int bear_damage = -25;
 //int storm_damage = -25;
@@ -16,9 +17,9 @@ void morning_event() {
 	int decision;
 
 	//print statuses
-	printf("Health: %d\n", health);
-	printf("Hunger: %d\n", hunger);
-	printf("Thirst: %d\n\n", thirst);
+	//printf("Health: %d\n", health);
+	//printf("Hunger: %d\n", hunger);
+	//printf("Thirst: %d\n\n", thirst);
 
 	//print to screen user decision, go find food, find water, or stay here
 	printf("Make a decision: \n");
@@ -31,7 +32,7 @@ void morning_event() {
 	
 
 	//random chance of storm, other unpredictable event
-	int random_event = rand() % 10;
+	int random_event = rand() % 3; // random number 0-2, 0 is nothing, 1 is bear, 2 is storm
 	//random event = random number 0-9, 0-5 = nothing, 6-7 = bear attack, 8-9 = storm
 	//when adding modes, use multiplier here to scale up hard mode, scale down easy mode
 
@@ -64,18 +65,18 @@ void morning_event() {
 void find_food(int random_event) {
 	int food_found = 45;
 	//if random number is in the bear range, 6-7, bear attack
-	if (random_event >= normal && random_event < bear_chance) {
+	if (random_event == bear_chance) {
 		//bear attack
 		bear(false);
 	}
 	//if random number is in the storm range, 8-9, storm
-	else if (random_event >= bear_chance) {
+	else if (random_event == storm_chance) {
 		//storm
 		storm(false);
 	}
 	//if random number is not in those ranges, it's a normal case
 	//additionally, if we want normal case to run through no matter what, we can remove else statement
-	else {
+	//else {
 		//normal case
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 
@@ -91,7 +92,7 @@ void find_food(int random_event) {
 			//additionally, can decrease hunger if we want, for wasting energy not finding food
 			//additionally, can modify food chance to increase
 		}
-	}
+	//}
 	return;
 }
 
@@ -103,18 +104,18 @@ void find_food(int random_event) {
 void find_water(int random_event) {
 	int water_found = 45;
 	//if random number is in the bear range, 6-7, bear attack
-	if (random_event >= normal && random_event < bear) {
+	if (random_event == bear_chance) {
 		//bear attack
 		bear(false);
 	}
 	//if random number is in the storm range, 8-9, storm
-	else if (random_event >= bear) {
+	else if (random_event == storm_chance) {
 		//storm
 		storm(false); //false because not at home
 	}
 	//if random number is not in those ranges, it's a normal case
 	//additionally, if we want normal case to run through no matter what, we can remove else statement
-	else {
+	//else {
 		//normal case
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 
@@ -130,7 +131,7 @@ void find_water(int random_event) {
 			//additionally, can decrease thirst if we want, for wasting energy not finding food
 			//additionally, can modify food chance to increase
 		}
-	}
+	//}
 	return;
 }
 
@@ -141,12 +142,12 @@ void find_water(int random_event) {
 */
 void stay_in(int random_event) {
 	//if random number is in the bear range, 6-7, bear attack
-	if (random_event >= normal && random_event < bear) {
+	if (random_event == bear_chance) {
 		//bear attack
 		bear(true);
 	}
 	//if random number is in the storm range, 8-9, storm
-	else if (random_event >= bear) {
+	else if (random_event == storm_chance) {
 		//storm
 		storm(true); //call storm function, at home so send in true for home boolean
 	}
@@ -162,13 +163,32 @@ void stay_in(int random_event) {
 * constants for chances as well as damages for each case located in function
 */
 void bear(bool home) {
+	printf("Oh no! A bear!\n\n");
+	
+	printf("   :'._..---.._.'\";\n");
+	printf("    `.             .'\n");
+	printf("    .'    ^   ^    `.\n");
+	printf("   :      a   a      :                 __....._\n");
+	printf("   :     _.-0-._     :---'\"\"'\"-....--'\"        '.\n");
+	printf("    :  .'   :   `.  :                          `,`.\n");
+	printf("     `.: '--'--' :.'                             ; ;\n");
+	printf("      : `._`-'_.'                                ;.'\n");
+	printf("      `.   '\"'                                   ;\n");
+	printf("       `.               '                        ;\n");
+	printf("        `.     `        :           `            ;\n");
+	printf("         .`.    ;       ;           :           ;\n");
+	printf("       .'    `-.'      ;            :          ;`.\n");
+	printf("   __.'      .'      .'              :        ;   `.\n");
+	printf(" .'      __.'      .'`--..__      _._.'      ;      ;\n");
+	printf(" `......'        .'         `'\"\"'`.'        ;......-'\n");
+	printf("       `.......-'                 `........'\n\n");
+
 	if (home) {
-		printf("A bear was lurking around but ignored you because you were home.\n");
+		printf("Luckily, you were at home so nothing happened.\n");
 		return;
 	}
 
 	int choice;
-	printf("Oh no! You ran into a bear!\n");
 	printf("What would you like to do?\n");
 	printf("0: Run away\n");
 	printf("1: Fight it\n");
@@ -193,7 +213,7 @@ void bear(bool home) {
 	if (choice == 0) {
 		if (r <= run_away) {
 			//success
-			printf("Congratualtions!\nYou have successfully ran away from the bear!\n\n");
+			printf("Congratulations!\nYou have successfully ran away from the bear!\n\n");
 		}
 		else {
 			printf("Oh no!\nThe bear caught you!\n");
@@ -239,17 +259,53 @@ void bear(bool home) {
 * constants for liklihood of events as well as event damage located in function
 */
 void storm(bool home) {
+	printf("Oh no! A storm is coming in!\n");
+	printf("   .edee...      .....       .eeec.   ..eee..\n"
+		"   .d*\"  \"\"\"\"*e..d*\"\"\"\"\"\"**e..e*\"\"  \"*c.d\"\"  \"\"*e.\n"
+		"  z\"           \"$          $\"\"       *F         **e.\n"
+		" z\"             \"c        d\"          *.           \"$.\n"
+		".F                        \"            \"            'F\n"
+		"d                                                   J%%\n"
+		"3         .                                        e\"\n"
+		"4r       e\"              .                        d\"\n"
+		" $     .d\"     .        .F             z ..zeeeeed\"\n"
+		" \"*beeeP\"      P        d      e.      $**\"\"    \"\n"
+		"     \"*b.     Jbc.     z*%%e.. .$**eeeeP\"\n"
+		"        \"*beee* \"$eeed\"  ^$$$\"\"    \"\n"
+		"                 '$$.     .$$$c\n"
+		"                  \"$$$.   e$$*$$c\n"
+		"                   \"$$..$$P\" '$$r\n"
+		"                    \"$$$$\"    \"$$$.           .d\n"
+		"        z.          .$$$\"      \"$$$.        .dP\"\n"
+		"        ^*e        e$$\"         \"$$$.     .e$\"\n"
+		"          *b.    .$$P\"           \"$$$.   z$\"\n"
+		"           \"$c  e$$\"              \"$$$.z$*\"\n"
+		"            ^*e$$P\"                \"$$$\"\n"
+		"              *$$                   \"$$r\n"
+		"              '$$F                 .$$P\n"
+		"               $$$                z$$\"\n"
+		"               4$$               d$$b.\n"
+		"               .$$%%            .$$*\"*$$e.\n"
+		"            e$$$*\"            z$$\"    \"*$$e.\n"
+		"           4$$\"              d$P\"        \"*$$e.\n"
+		"           $P              .d$$$c           \"*$$e..\n"
+		"          d$\"             z$$\" *$b.            \"*$L\n"
+		"         4$\"             e$P\"   \"*$c            ^$$\n"
+		"         $\"            .d$\"       \"$$$.           ^$r\n"
+		"        dP            z$$\"         ^*$e.          \"b\n"
+		"       4$            e$P             \"$$           \"\n"
+		"                    J$F               $$\n"
+		"                    $$               .$F\n"
+		"                   4$\"               $P\"\n\n");
 
 	//if at home nothing happens
 	if (home) {
-		printf("Oh no! A storm is coming in!\n");
 		printf("Luckily you are at home and nothing happened.\n");
 		return;
 	}
 
 	//if not at home player has to make a choice
 	int choice;
-	printf("Oh no! A storm is coming in!\n");
 	printf("What would you like to do?\n");
 	printf("0: Ignore it\n");
 	printf("1: Take shelter nearby\n");
