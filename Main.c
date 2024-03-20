@@ -6,12 +6,15 @@ int hunger = 100;
 int days = 14;
 double food_chance = 0.5; //50%
 double water_chance = 0.5; //50%
-int hungry_damage = -5;
-int thirsty_damage = -7;
+int hungry_damage = -15;
+int thirsty_damage = -20;
 int daily_hunger = -15;
 int daily_thirst = -15;
 
 int main() {
+	health = 100;
+	thirst = 100;
+	hunger = 100;
 
 	main_menu();
 
@@ -41,6 +44,14 @@ int main() {
 	//maybe just do one decision a day, keep it simple
 	for(int i = 1; i<days; i++){
 		printf("\nDay %d\n", i);
+		printf("Health: %d\n", health);
+		printf("Hunger: %d\n", hunger);
+		printf("Thirst: %d\n\n", thirst);
+		
+		//daily hunger and thirst decrements
+		modifyhunger(daily_hunger);
+		modifythirst(daily_thirst);
+
 		morning_event();
 		//midday_event();
 		//evening_event();
@@ -53,13 +64,11 @@ int main() {
 			modifyhealth(thirsty_damage);
 		}
 
-		modifyhunger(daily_hunger);
-		modifythirst(daily_thirst);
 
 		//If health runs out, print losing message and return
 		if (health <= 0) {
 			printf("\n\nUh-Oh, you died :(\n");
-			printf("You survived %d days\n\n", days);
+			printf("You survived %d days\n\n", i);
 			main();
 		}
 		
