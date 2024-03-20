@@ -2,7 +2,7 @@
 
 void main_menu()
 {
-    printf("Welcome to Fort Night: \n");
+    printf("Welcome to Fortnight: \n");
     printf("0: Quit\n1: Play Game\n");
     printf("2: Instructions\n");
     printf("3: Credits\n");
@@ -13,26 +13,26 @@ void main_menu()
     switch (choice)
     {
     case 0:
-        printf("Thank you for playing\n");
+        printf("Thanks for playing\n");
         exit(0);
     case 1:
         return;
     case 2:
         //write out instructions
-        printf("Welcome to Fort Night: the decision making survival game.\n");
-        printf("To start playing, select the 'Play' option in the Main Menu.\n");
-        printf("You will be given [one] option every day.\n"); //change to three options a day if we decide to change that
-        printf("Each option will impact the likelyhood of\n");
-        printf("surviving, so be planful. Additionally, there may be special events that \n");
-        printf("require you to react appropriately in order to survive\nGood Luck!\n\n");
+        printf("Welcome to Fort Night the decision making survival game.\n");
+        printf("To start playing please select the play option once in.\n");
+        printf("You will be given options every day.\n"); //change to three a day if we change that
+        printf("Each one of these options will impact your likelyhood of\n");
+        printf("surviving so be careful. Additionally there will be special events you \n");
+        printf("must react to to survive\nGood Luck!\n\n");
         main_menu();
     case 3:
         //write out credits
         printf("Developers:\n");
-        printf("Dylan Mingo\nJorge Torres\nJosh Nordan\nMax Gamble\nXavier Mejia\n\n");
+        printf("Dylan\nJorge\nJosh\nMax\nXavier\n\n");
         main_menu();
     default:
-        printf("Please input a valid choice.\n");
+        printf("Please choose a valid choice.\n");
         main_menu();
     }
 }
