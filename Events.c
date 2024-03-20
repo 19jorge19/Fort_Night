@@ -34,7 +34,7 @@ void morning_event() {
 	//random chance of storm, other unpredictable event
 	int random_event = rand() % 3; // random number 0-2, 0 is nothing, 1 is bear, 2 is storm
 	//random event = random number 0-9, 0-5 = nothing, 6-7 = bear attack, 8-9 = storm
-	//when adding modes, use multiplier here to scale up hard mode, scale down easy mode
+	//when eventually adding modes, use a multiplier here to scale up for hard mode, and scale down for easy mode
 
 
 	//send into different function if there is a storm or other event 
@@ -51,7 +51,7 @@ void morning_event() {
 		return;
 	}
 	else {
-		printf("Please choose a decision\n");
+		printf("Please choose a valid decision\n");
 		morning_event();
 	}
 
@@ -159,8 +159,10 @@ void stay_in(int random_event) {
 
 /*
 * Function is called if there is a bear attack
-* gives options to run away, fight, or play dead
-* constants for chances as well as damages for each case located in function
+* Gives options to run away, fight, or play dead
+* Constants for chances as well as damages for each case located in function
+* input = true, then at home, and therefore safe from bear
+* input = false, then not at home, and in danger
 */
 void bear(bool home) {
 	printf("Oh no! A bear!\n\n");
@@ -189,6 +191,7 @@ void bear(bool home) {
 	}
 
 	int choice;
+
 	printf("What would you like to do?\n");
 	printf("0: Run away\n");
 	printf("1: Fight it\n");
@@ -306,6 +309,85 @@ void storm(bool home) {
 
 	//if not at home player has to make a choice
 	int choice;
+	printf("What would you like to do?\n");
+	printf("0: Ignore it\n");
+	printf("1: Take shelter nearby\n");
+	printf("2: Try to find a cave\n");
+
+	scanf("%d", &choice);
+	printf("\n\n");
+
+
+	//initializing chances of success
+	double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
+	double ignore = 0.2;	//chance of ignoring it successfully 20%
+	double shelter = 0.95;		//chance of finding shelter 95%
+	double cave = 0.4;  //chance of finding a cave 40%
+
+	//initializing what you get for each scenario
+	int ignore_damage = -30;
+	int shelter_damage = -5;
+	int storm_damage = -25;
+
+	if (choice == 0) {
+		//ignore it
+		if (r <= ignore) {
+			//success
+			printf("Luckily the storm did not affect you.\n\n");
+		}
+		else {
+			//unsuccessful
+			printf("Uh oh!\nYou could not ignore the storm!\n");
+			printf("Health deducted by %d\n\n", abs(ignore_damage));
+			modifyhealth(ignore_damage);
+		}
+	}
+	else if (choice == 1) {
+		//take shelter nearby
+		if (r <= shelter) {
+			//success
+			printf("You find shelter in a nearby bush but still take some damage from the storm.\n");
+			printf("Health deducted by %d\n\n", abs(shelter_damage));
+			modifyhealth(shelter_damage);
+		}
+		else {
+			//unsuccessful
+			printf("Oh no!\nYou can't find shelter nearby!\n");
+			printf("Health deducted by %d\n\n", abs(storm_damage));
+			modifyhealth(storm_damage);
+		}
+
+	}
+	else if (choice == 2) {
+		//try to find a cave
+		if (r <= cave) {
+			//success
+			printf("You manage to find shelter in a nearby cave.\n\n");
+		}
+		else {
+			//unsuccessful
+			printf("You are unable to find a cave to shelter in.\n");
+			printf("Health deducted by %d\n\n", abs(storm_damage));
+			modifyhealth(storm_damage);
+		}
+	}
+	else {
+		printf("Please make a valid choice.\n\n");
+		storm(home);
+	}
+
+	return;
+
+	//if at home nothing happens
+	if (home) {
+		printf("Oh no! A storm is coming in!\n");
+		printf("Luckily you are at home and nothing happened.\n");
+		return;
+	}
+
+	//if not at home player has to make a choice
+	int choice;
+	printf("Oh no! A storm is coming in!\n");
 	printf("What would you like to do?\n");
 	printf("0: Ignore it\n");
 	printf("1: Take shelter nearby\n");
