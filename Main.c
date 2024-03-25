@@ -54,6 +54,9 @@ int main() {
 		//daily hunger and thirst decrements
 		modifyhunger(daily_hunger);
 		modifythirst(daily_thirst);
+		sick_health_counter(sick_health);
+		sick_hunger_counter(sick_hunger);
+		sick_thirst_counter(sick_thirst);
 
 		morning_event();
 		//midday_event();
