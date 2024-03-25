@@ -17,6 +17,9 @@ extern int hunger;
 extern int days;
 extern double food_chance;
 extern double water_chance;
+extern int sick_health;
+extern int sick_hunger;
+extern int sick_thirst;
 
 #endif
 

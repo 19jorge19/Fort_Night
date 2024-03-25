@@ -36,6 +36,8 @@ void morning_event() {
 	//random event = random number 0-9, 0-5 = nothing, 6-7 = bear attack, 8-9 = storm
 	//when eventually adding modes, use a multiplier here to scale up for hard mode, and scale down for easy mode
 
+	int random_sick = rand() % 100; // random number between 0-99. a value above 90 is sick, below is fine
+
 
 	//send into different function if there is a storm or other event 
 	if (decision == 0) {
@@ -62,7 +64,7 @@ void morning_event() {
 * If random event is in certain ranges, triggers bear or storm events
 * If not, function provides user with food based on chance defined by food_chance variable
 */
-void find_food(int random_event) {
+void find_food(int random_event, int random_sick) {
 	int food_found = 45;
 	//if random number is in the bear range, 6-7, bear attack
 	if (random_event == bear_chance) {
@@ -85,6 +87,11 @@ void find_food(int random_event) {
 			modifyhunger(food_found);
 			//additionally can modify food chance to decrease
 			food_chance -= 0.2;
+			if (random_sick >= 90){
+				printf("You've contracted food poisoning, and have developed a fever!");
+				sick_health = 3;
+				sick_hunger = 3;
+			}
 		}
 		else {
 			printf("Uh-Oh\nYou did not find any food.\n");
@@ -101,7 +108,7 @@ void find_food(int random_event) {
 * takes in random event integer and calls bear or storm if event occurs
 * if event does not occur, nothing happens
 */
-void find_water(int random_event) {
+void find_water(int random_event, int random_sick) {
 	int water_found = 45;
 	//if random number is in the bear range, 6-7, bear attack
 	if (random_event == bear_chance) {
@@ -124,6 +131,11 @@ void find_water(int random_event) {
 			modifythirst(water_found);
 			water_chance -= 0.2;
 			//additionally can modify water chance to decrease
+			if (random_sick >= 90){
+				printf("You've drunk contaminated water, and have contracted dysentary!");
+				sick_health = 3;
+				sick_thirst = 3;
+			}
 		}
 		else {
 			printf("Uh-Oh\nYou did not find any water.\n");
@@ -456,5 +468,38 @@ void storm(bool home) {
 	}
 
 	return;
+
+}
+
+void sick_health_counter(int sick_health){
+	if (sick_health > 0){
+	modify_health(-5);
+	
+	}
+	else if(sick_health == 0){
+		printf("You are no longer sick and losing extra health!");
+		
+	}
+	sick_health--;
+
+}
+void sick_food_counter(int sick_hunger){
+	if (sick_hunger > 0){
+		modify_hunger(-5);
+		}
+	else if(sick_hunger == 0){
+		printf("You are no longer sick and losing extra hunger!");
+	}
+	sick_hunger--;
+
+}
+void sick_water_counter(int sick_thirst){
+	if (sick_thirst > 0){
+		modify_thirst(-5);
+		}
+	else if(sick_thirst == 0) {
+		printf("You are no longer sick and losing extra thrist!");
+	}	
+	sick_thirst--;
 
 }
