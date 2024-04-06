@@ -458,3 +458,76 @@ void storm(bool home) {
 	return;
 
 }
+
+void dropped_package(bool home) {
+
+	printf("A package was dropped from a plane flying by!\n\n");
+
+	if (home) {
+		printf("You stayed home so you were unable to retrieve the package, a bear eventually got into it\n");
+		printf("   :'._..---.._.'\";\n");
+		printf("    `.             .'\n");
+		printf("    .'    ^   ^    `.\n");
+		printf("   :      a   a      :                 __....._\n");
+		printf("   :     _.-0-._     :---'\"\"'\"-....--'\"        '.\n");
+		printf("    :  .'   :   `.  :                          `,`.\n");
+		printf("     `.: '--'--' :.'                             ; ;\n");
+		printf("      : `._`-'_.'                                ;.'\n");
+		printf("      `.   '\"'                                   ;\n");
+		printf("       `.               '                        ;\n");
+		printf("        `.     `        :           `            ;\n");
+		printf("         .`.    ;       ;           :           ;\n");
+		printf("       .'    `-.'      ;            :          ;`.\n");
+		printf("   __.'      .'      .'              :        ;   `.\n");
+		printf(" .'      __.'      .'`--..__      _._.'      ;      ;\n");
+		printf(" `......'        .'         `'\"\"'`.'        ;......-'\n");
+		printf("       `.......-'                 `........'\n\n");
+	}
+	else {
+		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
+		if (r <= 0.25) {
+			if (hatchet = true) {
+				printf("You found food in the package!");
+				modifyhunger(25);
+			}
+			else {
+				hatchet = true;
+				printf("You got a hatchet!");
+			}
+		}
+
+		if (0.25 < r <= 0.5) {
+			if (backpack = true) {
+				printf("You found food in the package!");
+				modifyhunger(25);
+			}
+			else {
+				backpack = true;
+				printf("You got a backpack!");
+			}
+		}
+
+		if (0.5 < r <= 0.75) {
+			if (water_bottle = true) {
+				printf("You found food in the package!");
+				modifyhunger(25);
+			}
+			else {
+				water_bottle = true;
+				printf("You got a medkit!");
+			}
+		}
+		if (0.75 < r <= 1){
+			if (medkit = true) {
+				printf("You found food in the package!");
+				modifyhunger(25);
+			}
+			else {
+				medkit = true;
+				printf("You got a medkit!");
+		}
+
+		}
+	}
+	return;
+}
