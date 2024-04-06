@@ -1,4 +1,5 @@
 #include "Events.h"
+#include "Status_Bars.h"
 
 int normal = 0; //0-5 nothing for random event
 int bear_chance = 1; //6-7 bear
@@ -41,11 +42,11 @@ void morning_event() {
 
 	//send into different function if there is a storm or other event 
 	if (decision == 0) {
-		find_food(random_event);
+		find_food(random_event, random_sick);
 		return;
 	}
 	else if (decision == 1) {
-		find_water(random_event);
+		find_water(random_event, random_sick);
 		return;
 	}
 	else if (decision == 2) {
@@ -89,8 +90,8 @@ void find_food(int random_event, int random_sick) {
 			food_chance -= 0.2;
 			if (random_sick >= 90){
 				printf("You've contracted food poisoning, and have developed a fever!");
-				sick_health = 3;
-				sick_hunger = 3;
+				sick_health = 4;
+				sick_hunger = 4;
 			}
 		}
 		else {
@@ -133,8 +134,8 @@ void find_water(int random_event, int random_sick) {
 			//additionally can modify water chance to decrease
 			if (random_sick >= 90){
 				printf("You've drunk contaminated water, and have contracted dysentary!");
-				sick_health = 3;
-				sick_thirst = 3;
+				sick_health = 4;
+				sick_thirst = 4;
 			}
 		}
 		else {
@@ -398,7 +399,6 @@ void storm(bool home) {
 	}
 
 	//if not at home player has to make a choice
-	int choice;
 	printf("Oh no! A storm is coming in!\n");
 	printf("What would you like to do?\n");
 	printf("0: Ignore it\n");
@@ -410,15 +410,15 @@ void storm(bool home) {
 
 
 	//initializing chances of success
-	double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
-	double ignore = 0.2;	//chance of ignoring it successfully 20%
-	double shelter = 0.95;		//chance of finding shelter 95%
-	double cave = 0.4;  //chance of finding a cave 40%
+	r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
+	ignore = 0.2;	//chance of ignoring it successfully 20%
+	shelter = 0.95;		//chance of finding shelter 95%
+	cave = 0.4;  //chance of finding a cave 40%
 
 	//initializing what you get for each scenario
-	int ignore_damage = -30;
-	int shelter_damage = -5;
-	int storm_damage = -25;
+	ignore_damage = -30;
+	shelter_damage = -5;
+	storm_damage = -25;
 
 	if (choice == 0) {
 		//ignore it
@@ -472,11 +472,11 @@ void storm(bool home) {
 }
 
 void sick_health_counter(int sick_health){
-	if (sick_health > 0){
-	modify_health(-5);
+	if (sick_health > 1){
+	modifyhealth(-5);
 	
 	}
-	else if(sick_health == 0){
+	else if(sick_health == 1){
 		printf("You are no longer sick and losing extra health!");
 		
 	}
@@ -484,20 +484,20 @@ void sick_health_counter(int sick_health){
 
 }
 void sick_food_counter(int sick_hunger){
-	if (sick_hunger > 0){
-		modify_hunger(-5);
+	if (sick_hunger > 1){
+		modifyhunger(-5);
 		}
-	else if(sick_hunger == 0){
+	else if(sick_hunger == 1){
 		printf("You are no longer sick and losing extra hunger!");
 	}
 	sick_hunger--;
 
 }
 void sick_water_counter(int sick_thirst){
-	if (sick_thirst > 0){
-		modify_thirst(-5);
+	if (sick_thirst > 1){
+		modifythirst(-5);
 		}
-	else if(sick_thirst == 0) {
+	else if(sick_thirst == 1) {
 		printf("You are no longer sick and losing extra thrist!");
 	}	
 	sick_thirst--;

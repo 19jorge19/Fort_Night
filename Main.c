@@ -1,4 +1,5 @@
 #include "Global.h"
+#include "Events.h"
 
 //	Setting the values for status bars, food & water chance, and status depletion rates
 int health = 100;	// Initial value is 100 for all status bars
@@ -11,6 +12,9 @@ int hungry_damage = -15;		// Minus 15 health when hunger is zero
 int thirsty_damage = -20;	// Minus 20 health when thirst is zero
 int daily_hunger = -15;		// Decrease hunger by 15 every day
 int daily_thirst = -15;		// Decrease thrist by 15 every day
+int sick_hunger = 0;
+int sick_thirst = 0;
+int sick_health = 0;
 
 int main() {
 	health = 100;
@@ -55,8 +59,8 @@ int main() {
 		modifyhunger(daily_hunger);
 		modifythirst(daily_thirst);
 		sick_health_counter(sick_health);
-		sick_hunger_counter(sick_hunger);
-		sick_thirst_counter(sick_thirst);
+		sick_food_counter(sick_hunger);
+		sick_water_counter(sick_thirst);
 
 		morning_event();
 		//midday_event();
@@ -83,7 +87,7 @@ int main() {
 	printf("\n\nCongratulations!\nYou beat Fort Night!\n\n");
 
 	// Return to begining of main function
-	main();
+	main_menu();
 
 	return 0;
 }

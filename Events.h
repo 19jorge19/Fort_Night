@@ -10,9 +10,9 @@
 void morning_event();
 //void midday_event();
 //void evening_event();
-void find_food(int random_event);
-void find_water(int random_event);
-void stay_in(int random_event);
+void find_food(int, int);
+void find_water(int, int);
+void stay_in(int);
 void bear(bool home);
 void storm(bool home);
 void fever_sick(int random_sick);
