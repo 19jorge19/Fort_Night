@@ -1,4 +1,5 @@
 #include "Events.h"
+#include "Status_Bars.h"
 
 int normal = 0; 
 int bear_attack = 1; 
@@ -29,6 +30,8 @@ void morning_event() {
 	
 
 	//random chance of storm, other unpredictable event
+	int random_sick = rand() % 100; // random number between 0-99. a value above 90 is sick, below is fine
+
 	double r = (double)rand() / RAND_MAX;
 	if (r <= bear_chance) {
 		//bear attack
@@ -47,13 +50,14 @@ void morning_event() {
 		random_event = 0;
 	}
 
+
 	//send into different function if there is a storm or other event 
 	if (decision == 0) {
-		find_food(random_event);
+		find_food(random_event, random_sick);
 		return;
 	}
 	else if (decision == 1) {
-		find_water(random_event);
+		find_water(random_event, random_sick);
 		return;
 	}
 	else if (decision == 2) {
@@ -72,7 +76,7 @@ void morning_event() {
 * If random event is in certain ranges, triggers bear or storm events
 * If not, function provides user with food based on chance defined by food_chance variable
 */
-void find_food(int random_event) {
+void find_food(int random_event, int random_sick) {
 	int food_found = 45;
 	//if random number is in the bear range, 6-7, bear attack
 	if (random_event == bear_attack) {
@@ -99,6 +103,11 @@ void find_food(int random_event) {
 			modifyhunger(food_found);
 			//additionally can modify food chance to decrease
 			food_chance -= 0.2;
+			if (random_sick >= 90){
+				printf("You've contracted food poisoning, and have developed a fever!");
+				sick_health = 4;
+				sick_hunger = 4;
+			}
 		}
 		else {
 			printf("Uh-Oh\nYou did not find any food.\n");
@@ -115,7 +124,7 @@ void find_food(int random_event) {
 * takes in random event integer and calls bear or storm if event occurs
 * if event does not occur, nothing happens
 */
-void find_water(int random_event) {
+void find_water(int random_event, int random_sick) {
 	int water_found = 45;
 	//if random number is in the bear range, 6-7, bear attack
 	if (random_event == bear_attack) {
@@ -142,6 +151,11 @@ void find_water(int random_event) {
 			modifythirst(water_found);
 			water_chance -= 0.2;
 			//additionally can modify water chance to decrease
+			if (random_sick >= 90){
+				printf("You've drunk contaminated water, and have contracted dysentary!");
+				sick_health = 4;
+				sick_thirst = 4;
+			}
 		}
 		else {
 			printf("Uh-Oh\nYou did not find any water.\n");
@@ -400,7 +414,9 @@ void storm(bool home) {
 }
 
 
+
 void dropped_package(bool home) {
+
 
 	printf("A package was dropped from a plane flying by!\n\n");
 
@@ -469,4 +485,37 @@ void dropped_package(bool home) {
 		}
 	}
 	return;
+}
+
+void sick_health_counter(int sick_health){
+	if (sick_health > 1){
+	modifyhealth(-5);
+	
+	}
+	else if(sick_health == 1){
+		printf("You are no longer sick and losing extra health!");
+		
+	}
+	sick_health--;
+
+}
+void sick_food_counter(int sick_hunger){
+	if (sick_hunger > 1){
+		modifyhunger(-5);
+		}
+	else if(sick_hunger == 1){
+		printf("You are no longer sick and losing extra hunger!");
+	}
+	sick_hunger--;
+
+}
+void sick_water_counter(int sick_thirst){
+	if (sick_thirst > 1){
+		modifythirst(-5);
+		}
+	else if(sick_thirst == 1) {
+		printf("You are no longer sick and losing extra thrist!");
+	}	
+	sick_thirst--;
+
 }

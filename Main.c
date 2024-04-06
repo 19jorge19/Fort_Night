@@ -1,8 +1,13 @@
 #include "Global.h"
+#include "Events.h"
 
 int health = 100;
 int thirst = 100;
 int hunger = 100;
+int sick_hunger = 0;
+int sick_thirst = 0;
+int sick_health = 0;
+
 bool hatchet = false;
 bool water_bottle = false;
 bool medkit = false;
@@ -58,6 +63,9 @@ int main() {
 		//daily hunger and thirst decrements
 		modifyhunger(daily_hunger);
 		modifythirst(daily_thirst);
+		sick_health_counter(sick_health);
+		sick_food_counter(sick_hunger);
+		sick_water_counter(sick_thirst);
 
 		morning_event();
 		//midday_event();
@@ -85,6 +93,7 @@ int main() {
 	printf("\n\nCongratulations!\nYou beat Fortnight!\n\n");
 
 	main();
+
 
 	return 0;
 }
