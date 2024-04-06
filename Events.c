@@ -1,13 +1,10 @@
 #include "Events.h"
 #include "Status_Bars.h"
 
-int normal = 0; //0-5 nothing for random event
-int bear_chance = 1; //6-7 bear
-int storm_chance = 2;
-//storm is if not below those two events
-//int bear_damage = -25;
-//int storm_damage = -25;
-
+int normal = 0; 
+int bear_attack = 1; 
+int storm_appear = 2;
+int package_drop = 3;
 
 /*
 * Function displays status bars before prompting user to make a decision for what to do in the morning
@@ -16,7 +13,7 @@ int storm_chance = 2;
 */
 void morning_event() {
 	int decision;
-
+	int random_event;
 	//print statuses
 	//printf("Health: %d\n", health);
 	//printf("Hunger: %d\n", hunger);
@@ -33,11 +30,25 @@ void morning_event() {
 	
 
 	//random chance of storm, other unpredictable event
-	int random_event = rand() % 3; // random number 0-2, 0 is nothing, 1 is bear, 2 is storm
-	//random event = random number 0-9, 0-5 = nothing, 6-7 = bear attack, 8-9 = storm
-	//when eventually adding modes, use a multiplier here to scale up for hard mode, and scale down for easy mode
-
 	int random_sick = rand() % 100; // random number between 0-99. a value above 90 is sick, below is fine
+
+	double r = (double)rand() / RAND_MAX;
+	if (r <= bear_chance) {
+		//bear attack
+		random_event = 1;
+	}
+	else if (r <= bear_chance + storm_chance) {
+		//storm
+		random_event = 2;
+	}
+	else if (r <= bear_chance + storm_chance + package_chance) {
+		//package
+		random_event = 3;
+	}
+	else {
+		//normal
+		random_event = 0;
+	}
 
 
 	//send into different function if there is a storm or other event 
@@ -54,7 +65,7 @@ void morning_event() {
 		return;
 	}
 	else {
-		printf("Please choose a valid decision\n");
+		printf("Please choose a decision\n");
 		morning_event();
 	}
 
@@ -68,14 +79,18 @@ void morning_event() {
 void find_food(int random_event, int random_sick) {
 	int food_found = 45;
 	//if random number is in the bear range, 6-7, bear attack
-	if (random_event == bear_chance) {
+	if (random_event == bear_attack) {
 		//bear attack
 		bear(false);
 	}
 	//if random number is in the storm range, 8-9, storm
-	else if (random_event == storm_chance) {
+	else if (random_event == storm_appear) {
 		//storm
 		storm(false);
+	}
+	else if (random_event == package_drop) {
+		//dropped package
+		dropped_package(false);
 	}
 	//if random number is not in those ranges, it's a normal case
 	//additionally, if we want normal case to run through no matter what, we can remove else statement
@@ -112,14 +127,18 @@ void find_food(int random_event, int random_sick) {
 void find_water(int random_event, int random_sick) {
 	int water_found = 45;
 	//if random number is in the bear range, 6-7, bear attack
-	if (random_event == bear_chance) {
+	if (random_event == bear_attack) {
 		//bear attack
 		bear(false);
 	}
 	//if random number is in the storm range, 8-9, storm
-	else if (random_event == storm_chance) {
+	else if (random_event == storm_appear) {
 		//storm
 		storm(false); //false because not at home
+	}
+	else if (random_event == package_drop) {
+		//dropped package
+		dropped_package(false);
 	}
 	//if random number is not in those ranges, it's a normal case
 	//additionally, if we want normal case to run through no matter what, we can remove else statement
@@ -155,14 +174,18 @@ void find_water(int random_event, int random_sick) {
 */
 void stay_in(int random_event) {
 	//if random number is in the bear range, 6-7, bear attack
-	if (random_event == bear_chance) {
+	if (random_event == bear_attack) {
 		//bear attack
 		bear(true);
 	}
 	//if random number is in the storm range, 8-9, storm
-	else if (random_event == storm_chance) {
+	else if (random_event == storm_appear) {
 		//storm
 		storm(true); //call storm function, at home so send in true for home boolean
+	}
+	else if (random_event == package_drop) {
+		//dropped package
+		dropped_package(true);
 	}
 	else {
 		printf("You have stayed in, and nothing has happened.\n");
@@ -172,10 +195,8 @@ void stay_in(int random_event) {
 
 /*
 * Function is called if there is a bear attack
-* Gives options to run away, fight, or play dead
-* Constants for chances as well as damages for each case located in function
-* input = true, then at home, and therefore safe from bear
-* input = false, then not at home, and in danger
+* gives options to run away, fight, or play dead
+* constants for chances as well as damages for each case located in function
 */
 void bear(bool home) {
 	printf("Oh no! A bear!\n\n");
@@ -204,7 +225,6 @@ void bear(bool home) {
 	}
 
 	int choice;
-
 	printf("What would you like to do?\n");
 	printf("0: Run away\n");
 	printf("1: Fight it\n");
@@ -391,84 +411,80 @@ void storm(bool home) {
 
 	return;
 
-	//if at home nothing happens
+}
+
+
+
+void dropped_package(bool home) {
+
+
+	printf("A package was dropped from a plane flying by!\n\n");
+
 	if (home) {
-		printf("Oh no! A storm is coming in!\n");
-		printf("Luckily you are at home and nothing happened.\n");
-		return;
-	}
-
-	//if not at home player has to make a choice
-	printf("Oh no! A storm is coming in!\n");
-	printf("What would you like to do?\n");
-	printf("0: Ignore it\n");
-	printf("1: Take shelter nearby\n");
-	printf("2: Try to find a cave\n");
-
-	scanf("%d", &choice);
-	printf("\n\n");
-
-
-	//initializing chances of success
-	r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
-	ignore = 0.2;	//chance of ignoring it successfully 20%
-	shelter = 0.95;		//chance of finding shelter 95%
-	cave = 0.4;  //chance of finding a cave 40%
-
-	//initializing what you get for each scenario
-	ignore_damage = -30;
-	shelter_damage = -5;
-	storm_damage = -25;
-
-	if (choice == 0) {
-		//ignore it
-		if (r <= ignore) {
-			//success
-			printf("Luckily the storm did not affect you.\n\n");
-		}
-		else {
-			//unsuccessful
-			printf("Uh oh!\nYou could not ignore the storm!\n");
-			printf("Health deducted by %d\n\n", abs(ignore_damage));
-			modifyhealth(ignore_damage);
-		}
-	}
-	else if (choice == 1) {
-		//take shelter nearby
-		if (r <= shelter) {
-			//success
-			printf("You find shelter in a nearby bush but still take some damage from the storm.\n");
-			printf("Health deducted by %d\n\n", abs(shelter_damage));
-			modifyhealth(shelter_damage);
-		}
-		else {
-			//unsuccessful
-			printf("Oh no!\nYou can't find shelter nearby!\n");
-			printf("Health deducted by %d\n\n", abs(storm_damage));
-			modifyhealth(storm_damage);
-		}
-
-	}
-	else if (choice == 2) {
-		//try to find a cave
-		if (r <= cave) {
-			//success
-			printf("You manage to find shelter in a nearby cave.\n\n");
-		}
-		else {
-			//unsuccessful
-			printf("You are unable to find a cave to shelter in.\n");
-			printf("Health deducted by %d\n\n", abs(storm_damage));
-			modifyhealth(storm_damage);
-		}
+		printf("You stayed home so you were unable to retrieve the package, a bear eventually got into it\n");
+		printf("   :'._..---.._.'\";\n");
+		printf("    `.             .'\n");
+		printf("    .'    ^   ^    `.\n");
+		printf("   :      a   a      :                 __....._\n");
+		printf("   :     _.-0-._     :---'\"\"'\"-....--'\"        '.\n");
+		printf("    :  .'   :   `.  :                          `,`.\n");
+		printf("     `.: '--'--' :.'                             ; ;\n");
+		printf("      : `._`-'_.'                                ;.'\n");
+		printf("      `.   '\"'                                   ;\n");
+		printf("       `.               '                        ;\n");
+		printf("        `.     `        :           `            ;\n");
+		printf("         .`.    ;       ;           :           ;\n");
+		printf("       .'    `-.'      ;            :          ;`.\n");
+		printf("   __.'      .'      .'              :        ;   `.\n");
+		printf(" .'      __.'      .'`--..__      _._.'      ;      ;\n");
+		printf(" `......'        .'         `'\"\"'`.'        ;......-'\n");
+		printf("       `.......-'                 `........'\n\n");
 	}
 	else {
-		printf("Please make a valid choice.\n\n");
-		storm(home);
+		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
+		if (r <= 0.25) {
+			if (hatchet = false) {
+				printf("You found food in the package!\n");
+				modifyhunger(25);
+			}
+			else {
+				hatchet = true;
+				printf("You got a hatchet!\n");
+			}
+		}
+		else if (0.25 < r <= 0.5) {
+			if (backpack = false) {
+				printf("You found food in the package!\n");
+				modifyhunger(25);
+			}
+			else {
+				backpack = true;
+				printf("You got a backpack!\n");
+			}
+		}
+		else if (0.5 < r <= 0.75) {
+			if (water_bottle = false) {
+				printf("You found food in the package!\n");
+				modifyhunger(25);
+			}
+			else {
+				water_bottle = true;
+				printf("You got a medkit!\n");
+			}
+		}
+		else if (0.75 < r <= 1) {
+			if (medkit = false) {
+				printf("You found food in the package!\n");
+				modifyhunger(25);
+			}
+			else {
+				medkit = true;
+				printf("You got a medkit!\n");
+			}
+
+		}
 	}
-
 	return;
-
 }
 
 void sick_health_counter(int sick_health){

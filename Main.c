@@ -1,20 +1,27 @@
 #include "Global.h"
 #include "Events.h"
 
-//	Setting the values for status bars, food & water chance, and status depletion rates
-int health = 100;	// Initial value is 100 for all status bars
+int health = 100;
 int thirst = 100;
 int hunger = 100;
-int days = 14;		// Number of days to survive
-double food_chance = 0.5;	// 50% food chance
-double water_chance = 0.5;	// 50% water chance
-int hungry_damage = -15;		// Minus 15 health when hunger is zero
-int thirsty_damage = -20;	// Minus 20 health when thirst is zero
-int daily_hunger = -15;		// Decrease hunger by 15 every day
-int daily_thirst = -15;		// Decrease thrist by 15 every day
 int sick_hunger = 0;
 int sick_thirst = 0;
 int sick_health = 0;
+
+bool hatchet = false;
+bool water_bottle = false;
+bool medkit = false;
+bool backpack = false;
+int days = 14;
+double food_chance = 0.5; //50%
+double water_chance = 0.5; //50%
+double bear_chance = 0.2; //20%
+double storm_chance = 0.2; //20%
+double package_chance = 0.08; //8%
+int hungry_damage = -15;
+int thirsty_damage = -20;
+int daily_hunger = -15;
+int daily_thirst = -15;
 
 int main() {
 	health = 100;
@@ -23,9 +30,7 @@ int main() {
 
 	main_menu();
 
-	printf("Welcome to Fortnight! You have awoken in a forest with no memories,");
-	printf("all you know is that you must survive for 14 days before you are rescued. Can you survive?\n\n\n");
-
+	printf("Welcome to Fortnight! You have awoken in a forest with no memories, all you know is that you must survive for 14 days before you are rescued. Can you survive?\n\n\n");
 	printf("       /\\        /\\      \n");
 	printf("      /  \\      /  \\    \n");
 	printf("     /\\   \\    /   /\\   \n");
@@ -66,13 +71,14 @@ int main() {
 		//midday_event();
 		//evening_event();
 
-		//if hunger or thirst are zero, decrement health by appropraite amounts
+		//if hungry or thirsty, decrement health by appropraite amounts
 		if (hunger == 0) {
 			modifyhealth(hungry_damage);
 		}
 		if (thirst == 0) {
 			modifyhealth(thirsty_damage);
 		}
+
 
 		//If health runs out, print losing message and return
 		if (health <= 0) {
@@ -84,10 +90,10 @@ int main() {
 	 }
 	
 	//if made it through loop, and health is above 0, user won, print win message and return
-	printf("\n\nCongratulations!\nYou beat Fort Night!\n\n");
+	printf("\n\nCongratulations!\nYou beat Fortnight!\n\n");
 
-	// Return to begining of main function
-	main_menu();
+	main();
+
 
 	return 0;
 }
