@@ -26,7 +26,7 @@ int main() {
 
 	main_menu();
 
-	printf("Welcome to Fortnight! You have awoken in a forest with no memories, all you know is that you must survive for 14 days before you are rescued. Can you survive?\n\n\n");
+	printf("Welcome to Fortnight! You have awoken in a forest with no memories, \nall you know is that you must survive for 14 days before you are rescued. Can you survive?\n\n\n");
 	printf("       /\\        /\\      \n");
 	printf("      /  \\      /  \\    \n");
 	printf("     /\\   \\    /   /\\   \n");
@@ -43,7 +43,7 @@ int main() {
 	printf("    ||    ||    ||    ||  \n");
 	printf("    ||    ||    ||    ||  \n");
 	printf("    ||    ||    ||    ||  \n");
-	printf("    ||    ||    ||    ||  \n");
+	//printf("    ||    ||    ||    ||  \n");
 
 
 	//call main menu function
@@ -51,10 +51,10 @@ int main() {
 	
 	//maybe just do one decision a day, keep it simple
 	for(int i = 1; i<days; i++){
-		printf("\nDay %d\n", i);
-		printf("Health: %d\n", health);
-		printf("Hunger: %d\n", hunger);
-		printf("Thirst: %d\n\n", thirst);
+		printf("\nDay #%d: \n", i);
+		printf("Health: %d ", health);
+		printf("| Hunger: %d ", hunger);
+		printf("| Thirst: %d\n\n", thirst);
 		
 		//daily hunger and thirst decrements
 		modifyhunger(daily_hunger);
@@ -79,7 +79,7 @@ int main() {
 		//If health runs out, print losing message and return
 		if (health <= 0) {
 			printf("\n\nUh-Oh, you died :(\n");
-			printf("You survived %d days\n\n", i);
+			printf("You survived for %d days\n\n", i);
 			main();
 		}
 		

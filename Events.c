@@ -31,9 +31,9 @@ void morning_event() {
 
 	//print to screen user decision, go find food, find water, or stay here
 	printf("Make a decision: \n");
-	printf("0: Search for food\n");
-	printf("1: Search for water\n");
-	printf("2: Stay in\n");
+	printf("0: Search for food ");
+	printf("| 1: Search for water ");
+	printf("| 2: Stay in\n");
 
 	scanf("%d", &decision);
 	printf("\n");
@@ -173,7 +173,7 @@ void find_food(int random_event, int random_sick) {
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 
 		if (r <= food_chance) {
-			printf("Congratualations!\nYou have successfully found food!\n");
+			printf("Congrats!\nYou have successfully found food!\n");
 			modifyhunger(food_found);
 			//additionally can modify food chance to decrease
 			food_chance -= 0.2;
@@ -221,7 +221,7 @@ void find_water(int random_event, int random_sick) {
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 
 		if (r <= water_chance) {
-			printf("Congratualations!\nYou have successfully found water!\n");
+			printf("Congrats!\nYou have successfully found water!\n");
 			modifythirst(water_found);
 			water_chance -= 0.2;
 			//additionally can modify water chance to decrease
@@ -330,7 +330,7 @@ void bear(bool home) {
 	if (choice == 0) {
 		if (r <= run_away) {
 			//success
-			printf("Congratulations!\nYou successfully ran away from the bear!\n\n");
+			printf("Congrats!\nYou successfully ran away from the bear!\n\n");
 		}
 		else {
 			printf("Oh no!\nThe bear caught you!\n");
@@ -341,7 +341,7 @@ void bear(bool home) {
 	else if (choice == 1) {
 		if (hatchet == true) {
 			if (r <= fight_hatchet) {
-				printf("Congratulations!\nYou successfully fought off the bear and took some of its food!\n");
+				printf("Congrats!\nYou successfully fought off the bear and took some of its food!\n");
 				printf("Food increased by %d\n\n", bear_food);
 				modifyhunger(bear_food);
 			}
@@ -354,7 +354,7 @@ void bear(bool home) {
 		else{
 			if (r <= fight) {
 				//success
-				printf("Congratulations!\nYou successfully fought off the bear and took some of its food!\n");
+				printf("Congrats!\nYou successfully fought off the bear and took some of its food!\n");
 				printf("Food increased by %d\n\n", bear_food);
 				modifyhunger(bear_food);
 			}
@@ -368,7 +368,7 @@ void bear(bool home) {
 	else if (choice == 2) {
 		if (r <= play_dead) {
 			//success
-			printf("Congratualtions!\nThe bear left you alone.\n\n");
+			printf("Congrats!\nThe bear left you alone.\n\n");
 		}
 		else {
 			printf("Oh no!\nThe bear still attacked you!\n");
