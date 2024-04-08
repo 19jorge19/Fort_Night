@@ -20,6 +20,7 @@ extern double water_chance;
 extern int sick_health;
 extern int sick_hunger;
 extern int sick_thirst;
+extern int stay_count;
 
 #endif
 

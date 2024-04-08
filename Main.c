@@ -9,6 +9,7 @@ int hunger = 100;	//	Value of hunger
 int sick_hunger = 0;
 int sick_thirst = 0;
 int sick_health = 0;
+int stay_count = 1;
 
 
 int days = 14;	//	Days required to beat the game

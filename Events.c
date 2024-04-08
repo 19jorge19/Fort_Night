@@ -10,6 +10,7 @@ double water_chance = 0.5; //50%
 double bear_chance = 0.2; //20%
 double storm_chance = 0.2; //20%
 double package_chance = 0.08; //8%
+
 bool hatchet = false;
 bool water_bottle = false;
 bool medkit = false;
@@ -70,7 +71,8 @@ void morning_event() {
 		return;
 	}
 	else if (decision == 2) {
-		stay_in(random_event);
+		stay_count++;
+		stay_in(random_event, stay_count);
 		return;
 	}
 	else {
@@ -244,23 +246,29 @@ void find_water(int random_event, int random_sick) {
 * takes in random event integer and calls bear or storm if event occurs
 * if event does not occur, nothing happens 
 */
-void stay_in(int random_event) {
+void stay_in(int random_event, int stay_count) {
+
 	//if random number is in the bear range, 6-7, bear attack
 	if (random_event == bear_attack) {
 		//bear attack
 		bear(true);
+		sick_stay_counter(stay_count);
 	}
 	//if random number is in the storm range, 8-9, storm
 	else if (random_event == storm_appear) {
 		//storm
 		storm(true); //call storm function, at home so send in true for home boolean
+		sick_stay_counter(stay_count);
 	}
 	else if (random_event == package_drop) {
 		//dropped package
 		dropped_package(true);
+		sick_stay_counter(stay_count);
 	}
 	else {
-		printf("You have stayed in, and nothing has happened.\n");
+		sick_stay_counter(stay_count);
+		printf("You have stayed in, and nothing unexpected has happened.\n");
+		
 	}
 	return;
 }
@@ -618,4 +626,13 @@ void sick_water_counter(int sick_thirst){
 	}
 	else
 		sick_thirst = 0;
+}
+
+void sick_stay_counter(int stay_counter) {
+	if (stay_counter > 5) {
+		printf("You have stayed in for too long, and have gotten sick!\n");
+		sick_hunger = 4;
+		stay_counter = 1;
+	}
+	return;
 }

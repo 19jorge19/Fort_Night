@@ -15,7 +15,7 @@ void main_menu()
     int choice;
     scanf("%d", &choice);
 
-
+    
     if (choice == 0) {
         printf("Thanks for playing\n");
         exit(0);
@@ -43,13 +43,17 @@ void main_menu()
         printf("Please choose a valid choice.\n");
         main_menu();
     }
-   /* switch (choice)
+    
+
+    /*
+    switch (choice)
     {
     case 0:
         printf("Thanks for playing\n");
         exit(0);
     case 1:
         return;
+        break;
     case 2:
         //write out instructions
         printf("Welcome to Fortnight the decision-making survival game.\n");
@@ -59,16 +63,20 @@ void main_menu()
         printf("survival, so be careful. Additionally there will be special events you \n");
         printf("must react to in order to survive!\nGood Luck!\n\n");
         main_menu();
+        break;
     case 3:
         //write out credits
         printf("Developers:\n");
         printf("Dylan\nJorge\nJosh\nMax\nXavier\n\n");
         main_menu();
+        break;
     default:
         printf("Please choose a valid choice.\n");
         main_menu();
+        break;
     }
-    */
+   */
+
 }
 
 
