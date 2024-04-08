@@ -80,6 +80,68 @@ void morning_event() {
 
 }
 
+/*void midday_event() {
+	int decision;
+	int random_event;
+	//print statuses
+	printf("Health: %d\n", health);
+	printf("Hunger: %d\n", hunger);
+	printf("Thirst: %d\n\n", thirst);
+
+	//print to screen user decision, go find food, find water, or stay here
+	printf("Make a decision: \n");
+	printf("0: Search for food\n");
+	printf("1: Search for water\n");
+	printf("2: Stay in\n");
+
+	scanf("%d", &decision);
+	printf("\n");
+	
+
+	//random chance of storm, other unpredictable event
+	int random_sick = rand() % 100; // random number between 0-99. a value above 90 is sick, below is fine
+
+	double r = (double)rand() / RAND_MAX;
+	if (r <= bear_chance) {
+		//bear attack
+		random_event = 1;
+	}
+	else if (r <= bear_chance + storm_chance) {
+		//storm
+		random_event = 2;
+	}
+	else if (r <= bear_chance + storm_chance + package_chance) {
+		//package
+		random_event = 3;
+	}
+	else {
+		//normal
+		random_event = 0;
+	}
+
+
+	//send into different function if there is a storm or other event 
+	if (decision == 0) {
+		find_food(random_event, random_sick);
+		return;
+	}
+	else if (decision == 1) {
+		find_water(random_event, random_sick);
+		return;
+	}
+	else if (decision == 2) {
+		stay_in(random_event);
+		return;
+	}
+	else {
+		printf("Please choose a decision\n");
+		midday_event();
+	}
+
+}
+*/
+
+
 /*
 * Function takes in random_event number
 * If random event is in certain ranges, triggers bear or storm events
