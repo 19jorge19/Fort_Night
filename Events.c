@@ -5,6 +5,15 @@ int normal = 0;
 int bear_attack = 1; 
 int storm_appear = 2;
 int package_drop = 3;
+double food_chance = 0.5; //50%
+double water_chance = 0.5; //50%
+double bear_chance = 0.2; //20%
+double storm_chance = 0.2; //20%
+double package_chance = 0.08; //8%
+bool hatchet = false;
+bool water_bottle = false;
+bool medkit = false;
+bool backpack = false;
 
 /*
 * Function displays status bars before prompting user to make a decision for what to do in the morning

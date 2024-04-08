@@ -8,16 +8,9 @@ int sick_hunger = 0;
 int sick_thirst = 0;
 int sick_health = 0;
 
-bool hatchet = false;
-bool water_bottle = false;
-bool medkit = false;
-bool backpack = false;
+
 int days = 14;
-double food_chance = 0.5; //50%
-double water_chance = 0.5; //50%
-double bear_chance = 0.2; //20%
-double storm_chance = 0.2; //20%
-double package_chance = 0.08; //8%
+
 int hungry_damage = -15;
 int thirsty_damage = -20;
 int daily_hunger = -15;
@@ -36,18 +29,18 @@ int main() {
 	printf("     /\\   \\    /   /\\   \n");
 	printf("    /      \\__/      \\  \n");
 	printf("   /   /\\    /\\    /\\ \\ \n");
-	printf("  /   /  \\  /  \\  /  \\ \\ \n");
-	printf(" /   /    \\/    \\/    \\ \\ \n");
-	printf("/   /  /\\          /\\  \\ \\ \n");
-	printf("\\  /  /  \\/\\  /\\  /  \\  /\n");
-	printf(" \\/  /       \\/  \\/    \\/ \n");
-	printf("  \\/   /\\    /\\    /\\   \\/\n");
+	printf("  /   / /\\  /  \\  /  \\ \\ \n");
+	printf(" /   /    \\/   /\\/    \\ \\ \n");
+	printf("/   / /\\          /\\  /  \\ \n");
+	printf("\\  / /  \\/\\  /\\  /  \\/	 /\n");
+	printf(" \\/ /      \\/  \\/    \\  / \n");
+	printf("  \\/   /\\    /\\    /\\ \\/\\ \n");
 	printf("   \\  /  \\  /  \\  /  \\  / \n");
 	printf("    \\/    \\/    \\/    \\/  \n");
-	printf("     ||    ||    ||    ||  \n");
-	printf("     ||    ||    ||    ||  \n");
-	printf("     ||    ||    ||    ||  \n");
-	printf("     ||    ||    ||    ||  \n");
+	printf("    ||    ||    ||    ||  \n");
+	printf("    ||    ||    ||    ||  \n");
+	printf("    ||    ||    ||    ||  \n");
+	printf("    ||    ||    ||    ||  \n");
 
 
 	//call main menu function
