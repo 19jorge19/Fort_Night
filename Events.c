@@ -80,7 +80,8 @@ void morning_event() {
 
 }
 
-/*void midday_event() {
+/*
+void midday_event() {
 	int decision;
 	int random_event;
 	//print statuses
