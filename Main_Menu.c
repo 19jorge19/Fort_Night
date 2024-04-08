@@ -1,5 +1,10 @@
 #include "Global.h"
 
+/*
+*   Main Menu function:
+*   Menu has options to exit the program, play the game, show instructions on how to play the game, or to show the credits.
+*/
+
 void main_menu()
 {
     printf("Welcome to Fortnight: \n");
@@ -19,12 +24,12 @@ void main_menu()
         return;
     case 2:
         //write out instructions
-        printf("Welcome to Fort Night the decision making survival game.\n");
-        printf("To start playing please select the play option once in.\n");
-        printf("You will be given options every day.\n"); //change to three a day if we change that
+        printf("Welcome to Fortnight the decision-making survival game.\n");
+        printf("To start playing, please select the play option.\n");
+        printf("You will be given options every day to choose from.\n"); //change to three a day if we change that
         printf("Each one of these options will impact your likelyhood of\n");
-        printf("surviving so be careful. Additionally there will be special events you \n");
-        printf("must react to to survive\nGood Luck!\n\n");
+        printf("survival, so be careful. Additionally there will be special events you \n");
+        printf("must react to in order to survive!\nGood Luck!\n\n");
         main_menu();
     case 3:
         //write out credits

@@ -1,20 +1,22 @@
 #include "Global.h"
 #include "Events.h"
 
-int health = 100;
-int thirst = 100;
-int hunger = 100;
+int health = 100;	//	Value of health
+int thirst = 100;	//	Value of thirst
+int hunger = 100;	//	Value of hunger
+
+//	Values that store if player is sick, and which stat to decrease. Only decrease values is greater than 1
 int sick_hunger = 0;
 int sick_thirst = 0;
 int sick_health = 0;
 
 
-int days = 14;
+int days = 14;	//	Days required to beat the game
 
-int hungry_damage = -15;
-int thirsty_damage = -20;
-int daily_hunger = -15;
-int daily_thirst = -15;
+int hungry_damage = -15;	//	Decrease in health if hunger is zero
+int thirsty_damage = -20;	//	Decrease in health if thirst is zero
+int daily_hunger = -15;		//	Decrease in hunger after every day
+int daily_thirst = -15;		//	Decrease in thirst after every day
 
 int main() {
 	health = 100;

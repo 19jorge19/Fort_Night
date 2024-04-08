@@ -208,7 +208,7 @@ void stay_in(int random_event) {
 * constants for chances as well as damages for each case located in function
 */
 void bear(bool home) {
-	printf("Oh no! A bear!\n\n");
+	printf("Oh no! A bear appeared!\n\n");
 	
 	printf("   :'._..---.._.'\";\n");
 	printf("    `.             .'\n");
@@ -258,7 +258,7 @@ void bear(bool home) {
 	if (choice == 0) {
 		if (r <= run_away) {
 			//success
-			printf("Congratulations!\nYou have successfully ran away from the bear!\n\n");
+			printf("Congratulations!\nYou successfully ran away from the bear!\n\n");
 		}
 		else {
 			printf("Oh no!\nThe bear caught you!\n");
@@ -269,7 +269,7 @@ void bear(bool home) {
 	else if (choice == 1) {
 		if (r <= fight) {
 			//success
-			printf("Congratulations!\nYou have successfully fought off the bear and took some of its food!\n");
+			printf("Congratulations!\nYou successfully fought off the bear and took some of its food!\n");
 			printf("Food increased by %d\n\n", bear_food);
 			modifyhunger(bear_food);
 		}
@@ -304,7 +304,7 @@ void bear(bool home) {
 * constants for liklihood of events as well as event damage located in function
 */
 void storm(bool home) {
-	printf("Oh no! A storm is coming in!\n");
+	printf("Oh no! A storm is rolling in!\n");
 	printf("   .edee...      .....       .eeec.   ..eee..\n"
 		"   .d*\"  \"\"\"\"*e..d*\"\"\"\"\"\"**e..e*\"\"  \"*c.d\"\"  \"\"*e.\n"
 		"  z\"           \"$          $\"\"       *F         **e.\n"
@@ -375,11 +375,11 @@ void storm(bool home) {
 		//ignore it
 		if (r <= ignore) {
 			//success
-			printf("Luckily the storm did not affect you.\n\n");
+			printf("Luckily the storm moved the other way, avoiding you.\n\n");
 		}
 		else {
 			//unsuccessful
-			printf("Uh oh!\nYou could not ignore the storm!\n");
+			printf("Uh oh!\nYou were caught in the storm!\n");
 			printf("Health deducted by %d\n\n", abs(ignore_damage));
 			modifyhealth(ignore_damage);
 		}
@@ -394,7 +394,7 @@ void storm(bool home) {
 		}
 		else {
 			//unsuccessful
-			printf("Oh no!\nYou can't find shelter nearby!\n");
+			printf("Oh no!\nYou couldn't find shelter nearby!\n");
 			printf("Health deducted by %d\n\n", abs(storm_damage));
 			modifyhealth(storm_damage);
 		}
@@ -408,7 +408,7 @@ void storm(bool home) {
 		}
 		else {
 			//unsuccessful
-			printf("You are unable to find a cave to shelter in.\n");
+			printf("You were unable to find a cave to shelter in.\n");
 			printf("Health deducted by %d\n\n", abs(storm_damage));
 			modifyhealth(storm_damage);
 		}
@@ -423,14 +423,17 @@ void storm(bool home) {
 }
 
 
-
+/*	
+*	Event determining if a package has dropped, which may contain an item or food
+*	Package cannot be collected if 'stay at home' option is chosen
+*/ 
 void dropped_package(bool home) {
 
 
-	printf("A package was dropped from a plane flying by!\n\n");
+	printf("A package was accidentally dropped from a plane flying by!\n\n");
 
 	if (home) {
-		printf("You stayed home so you were unable to retrieve the package, a bear eventually got into it\n");
+		printf("You stayed home, so you were unable to retrieve the package. Sadly a bear eventually got into it\n");
 		printf("   :'._..---.._.'\";\n");
 		printf("    `.             .'\n");
 		printf("    .'    ^   ^    `.\n");
@@ -452,8 +455,8 @@ void dropped_package(bool home) {
 	else {
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 		if (r <= 0.25) {
-			if (hatchet = false) {
-				printf("You found food in the package!\n");
+			if (hatchet == false) {
+				printf("You found some canned food in the package!\n");
 				modifyhunger(25);
 			}
 			else {
@@ -462,8 +465,8 @@ void dropped_package(bool home) {
 			}
 		}
 		else if (0.25 < r <= 0.5) {
-			if (backpack = false) {
-				printf("You found food in the package!\n");
+			if (backpack == false) {
+				printf("You found some canned food in the package!\n");
 				modifyhunger(25);
 			}
 			else {
@@ -472,8 +475,8 @@ void dropped_package(bool home) {
 			}
 		}
 		else if (0.5 < r <= 0.75) {
-			if (water_bottle = false) {
-				printf("You found food in the package!\n");
+			if (water_bottle == false) {
+				printf("You found some canned food in the package!\n");
 				modifyhunger(25);
 			}
 			else {
@@ -482,8 +485,8 @@ void dropped_package(bool home) {
 			}
 		}
 		else if (0.75 < r <= 1) {
-			if (medkit = false) {
-				printf("You found food in the package!\n");
+			if (medkit == false) {
+				printf("You found some canned food in the package!\n");
 				modifyhunger(25);
 			}
 			else {
@@ -496,35 +499,60 @@ void dropped_package(bool home) {
 	return;
 }
 
+/*
+*	Checks to see if you are meant to lose health due to sickness
+*	Continually decreases counter, and only decreases health if 'sick_health' value is greater than 1.
+*/
 void sick_health_counter(int sick_health){
 	if (sick_health > 1){
-	modifyhealth(-5);
-	
+		modifyhealth(-5);
 	}
 	else if(sick_health == 1){
 		printf("You are no longer sick and losing extra health!");
 		
 	}
-	sick_health--;
 
+	if (sick_health > 0) {
+		sick_health--;
+	}
+	else
+		sick_health = 0;
 }
+
+/*
+*	Checks to see if you are meant to lose hunger due to sickness
+*	Continually decreases counter, and only decreases hunger if 'sick_hunger' value is greater than 1.
+*/
 void sick_food_counter(int sick_hunger){
 	if (sick_hunger > 1){
 		modifyhunger(-5);
-		}
+	}
 	else if(sick_hunger == 1){
 		printf("You are no longer sick and losing extra hunger!");
 	}
-	sick_hunger--;
 
+	if (sick_hunger > 0) {
+		sick_hunger--;
+	}
+	else
+		sick_hunger = 0;
 }
+
+/*
+*	Checks to see if you are meant to lose thirst due to sickness
+*	Continually decreases counter, and only decreases health if 'sick_thirst' value is greater than 1.
+*/
 void sick_water_counter(int sick_thirst){
 	if (sick_thirst > 1){
 		modifythirst(-5);
-		}
+	}
 	else if(sick_thirst == 1) {
 		printf("You are no longer sick and losing extra thrist!");
-	}	
-	sick_thirst--;
+	}
 
+	if (sick_thirst > 0) {
+		sick_thirst--;
+	}
+	else
+		sick_thirst = 0;
 }
