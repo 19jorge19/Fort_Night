@@ -10,6 +10,7 @@ double water_chance = 0.5; //50%
 double bear_chance = 0.2; //20%
 double storm_chance = 0.2; //20%
 double package_chance = 0.08; //8%
+double sick_chance = 90; 
 
 bool hatchet = false;
 bool water_bottle = false;
@@ -177,7 +178,7 @@ void find_food(int random_event, int random_sick) {
 			modifyhunger(food_found);
 			//additionally can modify food chance to decrease
 			food_chance -= 0.2;
-			if (random_sick >= 90){
+			if (random_sick >= sick_chance){
 				printf("You've contracted food poisoning, and have developed a fever!");
 				sick_health = 4;
 				sick_hunger = 4;
@@ -225,7 +226,7 @@ void find_water(int random_event, int random_sick) {
 			modifythirst(water_found);
 			water_chance -= 0.2;
 			//additionally can modify water chance to decrease
-			if (random_sick >= 90){
+			if (random_sick >= sick_chance){
 				printf("You've drunk contaminated water, and have contracted dysentary!");
 				sick_health = 4;
 				sick_thirst = 4;
