@@ -339,8 +339,8 @@ void bear(bool home) {
 		}
 	}
 	else if (choice == 1) {
-		if(hatchet == true){
-			if (r <= fight_hatchet){
+		if (hatchet == true) {
+			if (r <= fight_hatchet) {
 				printf("Congratulations!\nYou successfully fought off the bear and took some of its food!\n");
 				printf("Food increased by %d\n\n", bear_food);
 				modifyhunger(bear_food);
@@ -350,6 +350,7 @@ void bear(bool home) {
 				printf("Health decreased by %d\n\n", abs(fight_attack));
 				modifyhealth(fight_attack);
 			}
+		}
 		else{
 			if (r <= fight) {
 				//success
@@ -361,8 +362,7 @@ void bear(bool home) {
 				printf("Oh no!\nThe bear beat you!\n");
 				printf("Health decreased by %d\n\n", abs(fight_attack));
 				modifyhealth(fight_attack);
-			}
-		}		
+			}		
 		}
 	}
 	else if (choice == 2) {
