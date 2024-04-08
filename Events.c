@@ -315,9 +315,10 @@ void bear(bool home) {
 
 	//initializing chances of success
 	double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
-	double run_away = 0.3;	//chance of runing away 30%
-	double fight = 0.1;		//chance of beating it in a fight 10%
-	double play_dead = 0.7;  //chance of playing dead and it leaving you alone 70%
+	double run_away = 0.3;	    //chance of runing away 30%
+	double fight_hatchet = 0.5; //chance of beating with hatchet = 50%
+	double fight = 0.1;         //chance of beating it in a fight 10%
+	double play_dead = 0.7;    //chance of playing dead and it leaving you alone 70%
 
 	//initializing what you get for each scenario
 	int running_attack = -30;
@@ -338,16 +339,30 @@ void bear(bool home) {
 		}
 	}
 	else if (choice == 1) {
-		if (r <= fight) {
-			//success
-			printf("Congratulations!\nYou successfully fought off the bear and took some of its food!\n");
-			printf("Food increased by %d\n\n", bear_food);
-			modifyhunger(bear_food);
-		}
-		else {
-			printf("Oh no!\nThe bear beat you!\n");
-			printf("Health decreased by %d\n\n", abs(fight_attack));
-			modifyhealth(fight_attack);
+		if(hatchet == true){
+			if (r <= fight_hatchet){
+				printf("Congratulations!\nYou successfully fought off the bear and took some of its food!\n");
+				printf("Food increased by %d\n\n", bear_food);
+				modifyhunger(bear_food);
+			}
+			else {
+				printf("Oh no!\nThe bear beat you!\n");
+				printf("Health decreased by %d\n\n", abs(fight_attack));
+				modifyhealth(fight_attack);
+			}
+		else{
+			if (r <= fight) {
+				//success
+				printf("Congratulations!\nYou successfully fought off the bear and took some of its food!\n");
+				printf("Food increased by %d\n\n", bear_food);
+				modifyhunger(bear_food);
+			}
+			else {
+				printf("Oh no!\nThe bear beat you!\n");
+				printf("Health decreased by %d\n\n", abs(fight_attack));
+				modifyhealth(fight_attack);
+			}
+		}		
 		}
 	}
 	else if (choice == 2) {
