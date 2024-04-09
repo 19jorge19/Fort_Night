@@ -350,6 +350,7 @@ void storm(bool home) {
 	if (home) {
 		if(water_bottle == true){
 			printf("You stayed home and were able to collect some water using the water bottle!");
+			modifythirst(20);
 		}
 		else{
 			printf("Luckily you are at home and nothing happened.\n");
