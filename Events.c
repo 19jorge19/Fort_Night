@@ -10,7 +10,7 @@ double water_chance = 0.5; //50%
 double bear_chance = 0.2; //20%
 double storm_chance = 0.2; //20%
 double package_chance = 0.08; //8%
-double sick_chance = 90; 
+double sick_chance = 60; // Threshold for random_sick to cross
 
 bool hatchet = false;
 bool water_bottle = false;
@@ -41,7 +41,7 @@ void morning_event() {
 	
 
 	//random chance of storm, other unpredictable event
-	int random_sick = rand() % 100; // random number between 0-99. a value above 90 is sick, below is fine
+	int random_sick = rand() % 100; // random number between 0-99. Any value above 'sick_chance' is sick, while below is not sick
 
 	double r = (double)rand() / RAND_MAX;
 	if (r <= bear_chance) {
@@ -179,7 +179,7 @@ void find_food(int random_event, int random_sick) {
 			//additionally can modify food chance to decrease
 			food_chance -= 0.2;
 			if (random_sick >= sick_chance){
-				printf("You've contracted food poisoning, and have developed a fever!");
+				printf("You've contracted food poisoning, and have developed a fever!\n");
 				sick_health = 4;
 				sick_hunger = 4;
 			}
@@ -227,7 +227,7 @@ void find_water(int random_event, int random_sick) {
 			water_chance -= 0.2;
 			//additionally can modify water chance to decrease
 			if (random_sick >= sick_chance){
-				printf("You've drunk contaminated water, and have contracted dysentary!");
+				printf("You've drunk contaminated water, and have contracted dysentary!\n");
 				sick_health = 4;
 				sick_thirst = 4;
 			}
@@ -312,7 +312,7 @@ void bear(bool home) {
 	printf("2: Play dead\n");
 
 	scanf("%d", &choice);
-	printf("\n\n");
+	printf("\n");
 
 	//initializing chances of success
 	double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
@@ -444,7 +444,7 @@ void storm(bool home) {
 	printf("2: Try to find a cave\n");
 
 	scanf("%d", &choice);
-	printf("\n\n");
+	printf("\n");
 
 
 	//initializing chances of success
@@ -595,7 +595,7 @@ void sick_health_counter(int sick_health){
 		modifyhealth(-5);
 	}
 	else if(sick_health == 1){
-		printf("You are no longer sick and losing extra health!");
+		printf("You are no longer sick and losing extra health!\n");
 		
 	}
 
@@ -615,7 +615,7 @@ void sick_food_counter(int sick_hunger){
 		modifyhunger(-5);
 	}
 	else if(sick_hunger == 1){
-		printf("You are no longer sick and losing extra hunger!");
+		printf("You are no longer sick and losing extra hunger!\n");
 	}
 
 	if (sick_hunger > 0) {
@@ -634,7 +634,7 @@ void sick_water_counter(int sick_thirst){
 		modifythirst(-5);
 	}
 	else if(sick_thirst == 1) {
-		printf("You are no longer sick and losing extra thrist!");
+		printf("You are no longer sick and losing extra thrist!\n");
 	}
 
 	if (sick_thirst > 0) {

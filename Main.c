@@ -54,7 +54,7 @@ int main() {
 		printf("\nDay #%d: \n", i);
 		printf("Health: %d ", health);
 		printf("| Hunger: %d ", hunger);
-		printf("| Thirst: %d\n\n", thirst);
+		printf("| Thirst: %d\n", thirst);
 		
 		//daily hunger and thirst decrements
 		modifyhunger(daily_hunger);
@@ -78,8 +78,8 @@ int main() {
 
 		//If health runs out, print losing message and return
 		if (health <= 0) {
-			printf("\n\nUh-Oh, you died :(\n");
-			printf("You survived for %d days\n\n", i);
+			printf("\n---------\nUh-Oh, you died :(\n");
+			printf("You survived for %d days\n---------\n\n", i);
 			main();
 		}
 		
