@@ -511,7 +511,7 @@ void sick_health_counter(int sick_health){
 		modifyhealth(-5);
 	}
 	else if(sick_health == 1){
-		printf("You are no longer sick and losing extra health!\n");
+		printf("You are no longer losing extra health due to sickness!\n");
 		
 	}
 
@@ -531,7 +531,7 @@ void sick_food_counter(int sick_hunger){
 		modifyhunger(-5);
 	}
 	else if(sick_hunger == 1){
-		printf("You are no longer sick and losing extra hunger!\n");
+		printf("You are no longer losing extra hunger due to sickness!\n");
 	}
 
 	if (sick_hunger > 0) {
@@ -539,6 +539,21 @@ void sick_food_counter(int sick_hunger){
 	}
 	else
 		sick_hunger = 0;
+}
+
+void sick_counter(int sick_health, int sick_hunger, int sick_thirst) {
+	int h = sick_health;
+	int u = sick_hunger;
+	int t = sick_thirst;
+	sick_health_counter(sick_health);
+	sick_food_counter(sick_hunger);
+	sick_water_counter(sick_thirst);
+
+	if (sick_health <= h && sick_hunger <= u && sick_thirst <= t) {
+		if (h == 1 || u == 1 || t == 1) {
+			printf("You are no longer sick!\n");
+		}
+	}
 }
 
 /*
@@ -550,7 +565,7 @@ void sick_water_counter(int sick_thirst){
 		modifythirst(-5);
 	}
 	else if(sick_thirst == 1) {
-		printf("You are no longer sick and losing extra thrist!\n");
+		printf("You are no longer losing extra thrist due to sickness!\n");
 	}
 
 	if (sick_thirst > 0) {
