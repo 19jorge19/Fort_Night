@@ -25,7 +25,7 @@ void sick_stay_counter(int stay_counter);
 void print_bear();
 void print_storm();
 void choices();
-void status_show(int health, int hunger, int thirst);
-int random_event_set(int r);
+void status_show(int, int, int);
+int random_event_set(int);
 
 #endif
