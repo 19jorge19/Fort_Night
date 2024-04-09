@@ -187,7 +187,13 @@ void find_water(int random_event, int random_sick) {
 
 		if (r <= water_chance) {
 			printf("Congrats!\nYou have successfully found water!\n\n");
+			if (water_bottle == true){
+				printf("You have a water bottle. You are able to collect more water!");
+				modifythirs(water_found+20);
+			}
+			else{
 			modifythirst(water_found);
+			}
 			water_chance -= 0.2;
 			//additionally can modify water chance to decrease
 			if (random_sick >= sick_chance){
@@ -343,7 +349,14 @@ void storm(bool home) {
 
 	//if at home nothing happens
 	if (home) {
-		printf("Luckily you are at home and nothing happened.\n");
+		if(water_bottle == true){
+			printf("You stayed home and were able to collect some water using the water bottle!");
+			modifythirst(20);
+		}
+		else{
+			printf("Luckily you are at home and nothing happened.\n");
+		}
+		
 		return;
 	}
 
