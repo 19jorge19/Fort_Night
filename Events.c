@@ -41,22 +41,7 @@ void morning_event() {
 	int random_sick = rand() % 100; // random number between 0-99. Any value above 'sick_chance' is sick, while below is not sick
 
 	double r = (double)rand() / RAND_MAX;
-	if (r <= bear_chance) {
-		//bear attack
-		random_event = 1;
-	}
-	else if (r <= bear_chance + storm_chance) {
-		//storm
-		random_event = 2;
-	}
-	else if (r <= bear_chance + storm_chance + package_chance) {
-		//package
-		random_event = 3;
-	}
-	else {
-		//normal
-		random_event = 0;
-	}
+	random_event = random_event_set(r);
 
 
 	//send into different function if there is a storm or other event 
@@ -99,22 +84,7 @@ void midday_event() {
 	int random_sick = rand() % 100; // random number between 0-99. a value above 90 is sick, below is fine
 
 	double r = (double)rand() / RAND_MAX;
-	if (r <= bear_chance) {
-		//bear attack
-		random_event = 1;
-	}
-	else if (r <= bear_chance + storm_chance) {
-		//storm
-		random_event = 2;
-	}
-	else if (r <= bear_chance + storm_chance + package_chance) {
-		//package
-		random_event = 3;
-	}
-	else {
-		//normal
-		random_event = 0;
-	}
+	random_event = random_event_set(r);
 
 
 	//send into different function if there is a storm or other event 
@@ -662,4 +632,27 @@ printf("Hunger: %d\n", hunger);
 printf("Thirst: %d\n\n", thirst);
 
 	return;
+}
+
+int random_event_set(int r) {
+	int random_event;
+
+	if (r <= bear_chance) {
+		//bear attack
+		random_event = 1;
+	}
+	else if (r <= bear_chance + storm_chance) {
+		//storm
+		random_event = 2;
+	}
+	else if (r <= bear_chance + storm_chance + package_chance) {
+		//package
+		random_event = 3;
+	}
+	else {
+		//normal
+		random_event = 0;
+	}
+
+	return random_event;
 }
