@@ -140,8 +140,14 @@ void find_food(int random_event, int random_sick) {
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 
 		if (r <= food_chance) {
-			printf("Congrats!\nYou have successfully found food!\n\n");
-			modifyhunger(food_found);
+			if(backpack == true){
+				printf("Congrats!\nYou have successfully found food! You have a backpack so you can carry more food!\n\n");
+				modifyhunger(food_found+20);
+			}
+			else{
+				printf("Congrats!\nYou have successfully found food!\n\n");
+				modifyhunger(food_found);
+			}
 			//additionally can modify food chance to decrease
 			food_chance -= 0.2;
 			if (random_sick >= sick_chance){
