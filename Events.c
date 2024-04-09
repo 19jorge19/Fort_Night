@@ -12,6 +12,7 @@ double storm_chance = 0.2; //20%
 double package_chance = 0.08; //8%
 double sick_chance = 60; // Threshold for random_sick to cross
 
+
 bool hatchet = false;
 bool water_bottle = false;
 bool medkit = false;

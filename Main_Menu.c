@@ -15,9 +15,11 @@ void main_menu()
     int choice;
     scanf("%d", &choice);
 
+    /*
     if (choice != 0 && choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice != 6 && choice != 7 && choice != 8 && choice != 9) {
         exit(0);
     }
+    */
 
     
     if (choice == 0) {
