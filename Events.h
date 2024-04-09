@@ -28,6 +28,6 @@ void choices();
 void status_show(int, int, int);
 int random_event_set(int);
 void sick_item_check(bool);
-void sick_check(int, int, int);
+void sick_counter(int, int, int);
 
 #endif
