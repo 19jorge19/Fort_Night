@@ -26,5 +26,6 @@ void print_bear();
 void print_storm();
 void choices();
 void status_show(int health, int hunger, int thirst);
+int random_event_set(int r);
 
 #endif
