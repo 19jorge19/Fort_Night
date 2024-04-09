@@ -348,7 +348,13 @@ void storm(bool home) {
 
 	//if at home nothing happens
 	if (home) {
-		printf("Luckily you are at home and nothing happened.\n");
+		if(water_bottle == true){
+			printf("You stayed home and were able to collect some water using the water bottle!");
+		}
+		else{
+			printf("Luckily you are at home and nothing happened.\n");
+		}
+		
 		return;
 	}
 
