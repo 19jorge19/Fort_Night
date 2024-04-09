@@ -10,6 +10,7 @@ int sick_hunger = 0;
 int sick_thirst = 0;
 int sick_health = 0;
 int stay_count = 1;
+int day_count = 0;
 
 
 int days = 14;	//	Days required to beat the game
@@ -51,10 +52,9 @@ int main() {
 	
 	//maybe just do one decision a day, keep it simple
 	for(int i = 1; i<days; i++){
-		printf("\nDay #%d: \n", i);
-		printf("Health: %d ", health);
-		printf("| Hunger: %d ", hunger);
-		printf("| Thirst: %d\n", thirst);
+		day_count = i;
+		printf("\n| Day #%d | \n", i);
+		//status_show(health, hunger, thirst);
 		
 		//daily hunger and thirst decrements
 		modifyhunger(daily_hunger);
@@ -64,7 +64,7 @@ int main() {
 		sick_water_counter(sick_thirst);
 
 		morning_event();
-		//midday_event();
+		midday_event();
 		//evening_event();
 
 		//if hungry or thirsty, decrement health by appropraite amounts

@@ -25,16 +25,13 @@ bool backpack = false;
 void morning_event() {
 	int decision;
 	int random_event;
+
+	printf("\nMorning Event %d \n", day_count);
 	//print statuses
-	//printf("Health: %d\n", health);
-	//printf("Hunger: %d\n", hunger);
-	//printf("Thirst: %d\n\n", thirst);
+	status_show(health, hunger, thirst);
 
 	//print to screen user decision, go find food, find water, or stay here
-	printf("Make a decision: \n");
-	printf("0: Search for food ");
-	printf("| 1: Search for water ");
-	printf("| 2: Stay in\n");
+	choices();
 
 	scanf("%d", &decision);
 	printf("\n");
@@ -83,20 +80,16 @@ void morning_event() {
 
 }
 
-/*
+//*
 void midday_event() {
 	int decision;
 	int random_event;
 	//print statuses
-	printf("Health: %d\n", health);
-	printf("Hunger: %d\n", hunger);
-	printf("Thirst: %d\n\n", thirst);
+	printf("Midday Event %d \n", day_count);
+	status_show(health, hunger, thirst);
 
 	//print to screen user decision, go find food, find water, or stay here
-	printf("Make a decision: \n");
-	printf("0: Search for food\n");
-	printf("1: Search for water\n");
-	printf("2: Stay in\n");
+	choices();
 
 	scanf("%d", &decision);
 	printf("\n");
@@ -134,7 +127,7 @@ void midday_event() {
 		return;
 	}
 	else if (decision == 2) {
-		stay_in(random_event);
+		stay_in(random_event, stay_count);
 		return;
 	}
 	else {
@@ -143,7 +136,7 @@ void midday_event() {
 	}
 
 }
-*/
+//*/
 
 
 /*
@@ -174,18 +167,18 @@ void find_food(int random_event, int random_sick) {
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 
 		if (r <= food_chance) {
-			printf("Congrats!\nYou have successfully found food!\n");
+			printf("Congrats!\nYou have successfully found food!\n\n");
 			modifyhunger(food_found);
 			//additionally can modify food chance to decrease
 			food_chance -= 0.2;
 			if (random_sick >= sick_chance){
-				printf("You've contracted food poisoning, and have developed a fever!\n");
+				printf("You've contracted food poisoning, and have developed a fever!\n\n");
 				sick_health = 4;
 				sick_hunger = 4;
 			}
 		}
 		else {
-			printf("Uh-Oh\nYou did not find any food.\n");
+			printf("Uh-Oh\nYou did not find any food.\n\n");
 			food_chance += 0.2;
 			//additionally, can decrease hunger if we want, for wasting energy not finding food
 			//additionally, can modify food chance to increase
@@ -222,18 +215,18 @@ void find_water(int random_event, int random_sick) {
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 
 		if (r <= water_chance) {
-			printf("Congrats!\nYou have successfully found water!\n");
+			printf("Congrats!\nYou have successfully found water!\n\n");
 			modifythirst(water_found);
 			water_chance -= 0.2;
 			//additionally can modify water chance to decrease
 			if (random_sick >= sick_chance){
-				printf("You've drunk contaminated water, and have contracted dysentary!\n");
+				printf("You've drunk contaminated water, and have contracted dysentary!\n\n");
 				sick_health = 4;
 				sick_thirst = 4;
 			}
 		}
 		else {
-			printf("Uh-Oh\nYou did not find any water.\n");
+			printf("Uh-Oh\nYou did not find any water.\n\n");
 			water_chance += 0.2;
 			//additionally, can decrease thirst if we want, for wasting energy not finding food
 			//additionally, can modify food chance to increase
@@ -281,24 +274,7 @@ void stay_in(int random_event, int stay_count) {
 */
 void bear(bool home) {
 	printf("Oh no! A bear appeared!\n\n");
-	
-	printf("   :'._..---.._.'\";\n");
-	printf("    `.             .'\n");
-	printf("    .'    ^   ^    `.\n");
-	printf("   :      a   a      :                 __....._\n");
-	printf("   :     _.-0-._     :---'\"\"'\"-....--'\"        '.\n");
-	printf("    :  .'   :   `.  :                          `,`.\n");
-	printf("     `.: '--'--' :.'                             ; ;\n");
-	printf("      : `._`-'_.'                                ;.'\n");
-	printf("      `.   '\"'                                   ;\n");
-	printf("       `.               '                        ;\n");
-	printf("        `.     `        :           `            ;\n");
-	printf("         .`.    ;       ;           :           ;\n");
-	printf("       .'    `-.'      ;            :          ;`.\n");
-	printf("   __.'      .'      .'              :        ;   `.\n");
-	printf(" .'      __.'      .'`--..__      _._.'      ;      ;\n");
-	printf(" `......'        .'         `'\"\"'`.'        ;......-'\n");
-	printf("       `.......-'                 `........'\n\n");
+	print_bear();
 
 	if (home) {
 		printf("Luckily, you were at home so nothing happened.\n");
@@ -392,43 +368,7 @@ void bear(bool home) {
 */
 void storm(bool home) {
 	printf("Oh no! A storm is rolling in!\n");
-	printf("   .edee...      .....       .eeec.   ..eee..\n"
-		"   .d*\"  \"\"\"\"*e..d*\"\"\"\"\"\"**e..e*\"\"  \"*c.d\"\"  \"\"*e.\n"
-		"  z\"           \"$          $\"\"       *F         **e.\n"
-		" z\"             \"c        d\"          *.           \"$.\n"
-		".F                        \"            \"            'F\n"
-		"d                                                   J%%\n"
-		"3         .                                        e\"\n"
-		"4r       e\"              .                        d\"\n"
-		" $     .d\"     .        .F             z ..zeeeeed\"\n"
-		" \"*beeeP\"      P        d      e.      $**\"\"    \"\n"
-		"     \"*b.     Jbc.     z*%%e.. .$**eeeeP\"\n"
-		"        \"*beee* \"$eeed\"  ^$$$\"\"    \"\n"
-		"                 '$$.     .$$$c\n"
-		"                  \"$$$.   e$$*$$c\n"
-		"                   \"$$..$$P\" '$$r\n"
-		"                    \"$$$$\"    \"$$$.           .d\n"
-		"        z.          .$$$\"      \"$$$.        .dP\"\n"
-		"        ^*e        e$$\"         \"$$$.     .e$\"\n"
-		"          *b.    .$$P\"           \"$$$.   z$\"\n"
-		"           \"$c  e$$\"              \"$$$.z$*\"\n"
-		"            ^*e$$P\"                \"$$$\"\n"
-		"              *$$                   \"$$r\n"
-		"              '$$F                 .$$P\n"
-		"               $$$                z$$\"\n"
-		"               4$$               d$$b.\n"
-		"               .$$%%            .$$*\"*$$e.\n"
-		"            e$$$*\"            z$$\"    \"*$$e.\n"
-		"           4$$\"              d$P\"        \"*$$e.\n"
-		"           $P              .d$$$c           \"*$$e..\n"
-		"          d$\"             z$$\" *$b.            \"*$L\n"
-		"         4$\"             e$P\"   \"*$c            ^$$\n"
-		"         $\"            .d$\"       \"$$$.           ^$r\n"
-		"        dP            z$$\"         ^*$e.          \"b\n"
-		"       4$            e$P             \"$$           \"\n"
-		"                    J$F               $$\n"
-		"                    $$               .$F\n"
-		"                   4$\"               $P\"\n\n");
+	print_storm();
 
 	//if at home nothing happens
 	if (home) {
@@ -521,23 +461,7 @@ void dropped_package(bool home) {
 
 	if (home) {
 		printf("You stayed home, so you were unable to retrieve the package. Sadly a bear eventually got into it\n");
-		printf("   :'._..---.._.'\";\n");
-		printf("    `.             .'\n");
-		printf("    .'    ^   ^    `.\n");
-		printf("   :      a   a      :                 __....._\n");
-		printf("   :     _.-0-._     :---'\"\"'\"-....--'\"        '.\n");
-		printf("    :  .'   :   `.  :                          `,`.\n");
-		printf("     `.: '--'--' :.'                             ; ;\n");
-		printf("      : `._`-'_.'                                ;.'\n");
-		printf("      `.   '\"'                                   ;\n");
-		printf("       `.               '                        ;\n");
-		printf("        `.     `        :           `            ;\n");
-		printf("         .`.    ;       ;           :           ;\n");
-		printf("       .'    `-.'      ;            :          ;`.\n");
-		printf("   __.'      .'      .'              :        ;   `.\n");
-		printf(" .'      __.'      .'`--..__      _._.'      ;      ;\n");
-		printf(" `......'        .'         `'\"\"'`.'        ;......-'\n");
-		printf("       `.......-'                 `........'\n\n");
+		print_bear();
 	}
 	else {
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
@@ -650,5 +574,92 @@ void sick_stay_counter(int stay_counter) {
 		sick_hunger = 4;
 		stay_counter = 1;
 	}
+	return;
+}
+
+void print_bear() {
+
+	printf("   :'._..---.._.'\";\n");
+	printf("    `.             .'\n");
+	printf("    .'    ^   ^    `.\n");
+	printf("   :      a   a      :                 __....._\n");
+	printf("   :     _.-0-._     :---'\"\"'\"-....--'\"        '.\n");
+	printf("    :  .'   :   `.  :                          `,`.\n");
+	printf("     `.: '--'--' :.'                             ; ;\n");
+	printf("      : `._`-'_.'                                ;.'\n");
+	printf("      `.   '\"'                                   ;\n");
+	printf("       `.               '                        ;\n");
+	printf("        `.     `        :           `            ;\n");
+	printf("         .`.    ;       ;           :           ;\n");
+	printf("       .'    `-.'      ;            :          ;`.\n");
+	printf("   __.'      .'      .'              :        ;   `.\n");
+	printf(" .'      __.'      .'`--..__      _._.'      ;      ;\n");
+	printf(" `......'        .'         `'\"\"'`.'        ;......-'\n");
+	printf("       `.......-'                 `........'\n\n");
+	return;
+
+}
+
+void print_storm() {
+
+	printf("   .edee...      .....       .eeec.   ..eee..\n"
+		"   .d*\"  \"\"\"\"*e..d*\"\"\"\"\"\"**e..e*\"\"  \"*c.d\"\"  \"\"*e.\n"
+		"  z\"           \"$          $\"\"       *F         **e.\n"
+		" z\"             \"c        d\"          *.           \"$.\n"
+		".F                        \"            \"            'F\n"
+		"d                                                   J%%\n"
+		"3         .                                        e\"\n"
+		"4r       e\"              .                        d\"\n"
+		" $     .d\"     .        .F             z ..zeeeeed\"\n"
+		" \"*beeeP\"      P        d      e.      $**\"\"    \"\n"
+		"     \"*b.     Jbc.     z*%%e.. .$**eeeeP\"\n"
+		"        \"*beee* \"$eeed\"  ^$$$\"\"    \"\n"
+		"                 '$$.     .$$$c\n"
+		"                  \"$$$.   e$$*$$c\n"
+		"                   \"$$..$$P\" '$$r\n"
+		"                    \"$$$$\"    \"$$$.           .d\n"
+		"        z.          .$$$\"      \"$$$.        .dP\"\n"
+		"        ^*e        e$$\"         \"$$$.     .e$\"\n"
+		"          *b.    .$$P\"           \"$$$.   z$\"\n"
+		"           \"$c  e$$\"              \"$$$.z$*\"\n"
+		"            ^*e$$P\"                \"$$$\"\n"
+		"              *$$                   \"$$r\n"
+		"              '$$F                 .$$P\n"
+		"               $$$                z$$\"\n"
+		"               4$$               d$$b.\n"
+		"               .$$%%            .$$*\"*$$e.\n"
+		"            e$$$*\"            z$$\"    \"*$$e.\n"
+		"           4$$\"              d$P\"        \"*$$e.\n"
+		"           $P              .d$$$c           \"*$$e..\n"
+		"          d$\"             z$$\" *$b.            \"*$L\n"
+		"         4$\"             e$P\"   \"*$c            ^$$\n"
+		"         $\"            .d$\"       \"$$$.           ^$r\n"
+		"        dP            z$$\"         ^*$e.          \"b\n"
+		"       4$            e$P             \"$$           \"\n"
+		"                    J$F               $$\n"
+		"                    $$               .$F\n"
+		"                   4$\"               $P\"\n\n");
+
+	return;
+}
+
+void choices(){
+
+	printf("Make a decision: \n");
+	printf("0: Search for food ");
+	printf("| 1: Search for water ");
+	printf("| 2: Stay in\n");
+
+	return;
+
+}
+
+void status_show(int health, int hunger, int thirst) {
+
+
+printf("Health: %d\n", health);
+printf("Hunger: %d\n", hunger);
+printf("Thirst: %d\n\n", thirst);
+
 	return;
 }

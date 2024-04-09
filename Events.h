@@ -22,5 +22,9 @@ void sick_health_counter(int sick_health);
 void sick_food_counter(int sick_hunger);
 void sick_water_counter(int sick_thirst);
 void sick_stay_counter(int stay_counter);
+void print_bear();
+void print_storm();
+void choices();
+void status_show(int health, int hunger, int thirst);
 
 #endif
