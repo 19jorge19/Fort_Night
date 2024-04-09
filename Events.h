@@ -26,7 +26,7 @@ void print_bear();
 void print_storm();
 void choices();
 void status_show(int, int, int);
-int random_event_set(int);
+int random_event_set(float);
 void sick_item_check(bool);
 void sick_counter(int, int, int);
 

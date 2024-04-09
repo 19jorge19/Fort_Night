@@ -8,9 +8,9 @@ int package_drop = 3;
 double food_chance = 0.5; //50%
 double water_chance = 0.5; //50%
 double bear_chance = 0.2; //20%
-double storm_chance = 0.0; //20%
+double storm_chance = 0.2; //20%
 double package_chance = 0.08; //8%
-double sick_chance = 60; // Threshold for random_sick to cross
+double sick_chance = 80; // Threshold for random_sick to cross
 
 bool hatchet = false;
 bool water_bottle = false;
@@ -41,7 +41,7 @@ void morning_event() {
 	//random chance of storm, other unpredictable event
 	int random_sick = rand() % 100; // random number between 0-99. Any value above 'sick_chance' is sick, while below is not sick
 
-	double r = (double)rand() / RAND_MAX;
+	float r = (float)rand() / (float)RAND_MAX;
 	random_event = random_event_set(r);
 
 
@@ -85,7 +85,7 @@ void midday_event() {
 	//random chance of storm, other unpredictable event
 	int random_sick = rand() % 100; // random number between 0-99. a value above 90 is sick, below is fine
 
-	double r = (double)rand() / RAND_MAX;
+	float r = (float)rand() / (float)RAND_MAX;
 	random_event = random_event_set(r);
 
 
@@ -675,7 +675,7 @@ printf("Thirst: %d\n\n", thirst);
 * 
 * 
 */
-int random_event_set(int r) {
+int random_event_set(float r) {
 	int random_event = 0;
 
 	if (r <= bear_chance) {
