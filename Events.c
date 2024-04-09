@@ -8,10 +8,9 @@ int package_drop = 3;
 double food_chance = 0.5; //50%
 double water_chance = 0.5; //50%
 double bear_chance = 0.2; //20%
-double storm_chance = 0.2; //20%
+double storm_chance = 0.0; //20%
 double package_chance = 0.08; //8%
 double sick_chance = 60; // Threshold for random_sick to cross
-
 
 bool hatchet = false;
 bool water_bottle = false;
@@ -30,6 +29,7 @@ void morning_event() {
 	printf("\nMorning Event %d \n", day_count);
 	//print statuses
 	status_show(health, hunger, thirst);
+	sick_item_check(medkit);
 
 	//print to screen user decision, go find food, find water, or stay here
 	choices();
@@ -73,6 +73,7 @@ void midday_event() {
 	//print statuses
 	printf("Midday Event %d \n", day_count);
 	status_show(health, hunger, thirst);
+	sick_item_check(medkit);
 
 	//print to screen user decision, go find food, find water, or stay here
 	choices();
@@ -105,6 +106,7 @@ void midday_event() {
 		printf("Please choose a decision\n");
 		midday_event();
 	}
+	
 
 }
 //*/
@@ -189,7 +191,7 @@ void find_water(int random_event, int random_sick) {
 			printf("Congrats!\nYou have successfully found water!\n\n");
 			if (water_bottle == true){
 				printf("You have a water bottle. You are able to collect more water!");
-				modifythirs(water_found+20);
+				modifythirst(water_found+20);
 			}
 			else{
 			modifythirst(water_found);
@@ -648,8 +650,12 @@ printf("Thirst: %d\n\n", thirst);
 	return;
 }
 
+/*
+* 
+* 
+*/
 int random_event_set(int r) {
-	int random_event;
+	int random_event = 0;
 
 	if (r <= bear_chance) {
 		//bear attack
@@ -669,4 +675,17 @@ int random_event_set(int r) {
 	}
 
 	return random_event;
+}
+
+void sick_item_check(bool medkit) {
+
+	if (medkit == true && (sick_hunger >= 1 || sick_thirst >= 1 || sick_health >= 1)) {
+			printf("**ITEM NOTICE**: You have used the medkit and cured your sickness!\n");
+			sick_hunger = 0;
+			sick_health = 0;
+			sick_thirst = 0;
+			medkit = false;
+	}
+
+	return;
 }

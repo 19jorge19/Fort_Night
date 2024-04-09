@@ -20,7 +20,6 @@ void main_menu()
         exit(0);
     }
     */
-
     
     if (choice == 0) {
         printf("Thanks for playing\n");

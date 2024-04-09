@@ -64,7 +64,7 @@ int main() {
 		sick_water_counter(sick_thirst);
 
 		morning_event();
-		midday_event();
+		//midday_event();
 		//evening_event();
 
 		//if hungry or thirsty, decrement health by appropraite amounts

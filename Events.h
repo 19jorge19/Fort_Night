@@ -27,5 +27,6 @@ void print_storm();
 void choices();
 void status_show(int, int, int);
 int random_event_set(int);
+void sick_item_check(bool);
 
 #endif
