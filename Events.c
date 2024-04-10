@@ -268,9 +268,9 @@ void bear(bool home) {
 
 	int choice;
 	printf("What would you like to do?\n");
-	printf("0: Run away\n");
-	printf("1: Fight it\n");
-	printf("2: Play dead\n");
+	printf("0: Run away ");
+	printf("| 1: Fight it ");
+	printf("| 2: Play dead\n");
 
 	scanf("%d", &choice);
 	printf("\n");
@@ -371,9 +371,9 @@ void storm(bool home) {
 	//if not at home player has to make a choice
 	int choice;
 	printf("What would you like to do?\n");
-	printf("0: Ignore it\n");
-	printf("1: Take shelter nearby\n");
-	printf("2: Try to find a cave\n");
+	printf("0: Ignore it ");
+	printf("| 1: Take shelter nearby ");
+	printf("| 2: Try to find a cave\n");
 
 	scanf("%d", &choice);
 	printf("\n");
