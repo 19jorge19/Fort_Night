@@ -32,7 +32,7 @@ void print_ant();
 void choices();
 void status_show(int, int, int);
 
-
+bool check_totem();
 
 
 #endif

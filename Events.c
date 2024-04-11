@@ -18,6 +18,16 @@ bool hatchet = false;
 bool water_bottle = false;
 bool medkit = false;
 bool backpack = false;
+bool totem = false; // can change name 
+
+bool check_totem() {
+	if (totem == true) {
+		return true;
+	}
+	else if (totem == false) {
+		return false;
+	}
+}
 
 /*
 * Function displays status bars before prompting user to make a decision for what to do in the morning
@@ -531,6 +541,11 @@ return;
 
 }
 
+/*
+* Function is called if the user falls into an ant hill
+* Checks to see if the user is home or not, and gives the player options on what to do
+* if they are not at home/shelter
+*/
 void ants(bool home) {
 
 	if (home) {
@@ -665,6 +680,9 @@ void dropped_package(bool home) {
 	return;
 }
 
+/*
+* Prints out ASCII art of a bear
+*/
 void print_bear() {
 
 	printf("   :'._..---.._.'\";\n");
@@ -688,6 +706,9 @@ void print_bear() {
 
 }
 
+/*
+* Prints out ASCII art of a stormcloud
+*/
 void print_storm() {
 
 	printf("   .edee...      .....       .eeec.   ..eee..\n"
@@ -731,6 +752,9 @@ void print_storm() {
 	return;
 }
 
+/*
+* Prints out ASCII art of an ant
+*/
 void print_ant() {
 
 	printf(" \\       /\n");
@@ -758,6 +782,9 @@ void choices(){
 
 }
 
+/*
+* Prints out the current values for health, hunger, and thirst
+*/
 void status_show(int health, int hunger, int thirst) {
 
 
@@ -768,6 +795,9 @@ printf("Thirst: %d\n\n", thirst);
 	return;
 }
 
+/*
+* Checks to see if there is a healthkit and the plaer is sick. CUres them of sickness if both are true
+*/
 void sick_item_check(bool medkit) {
 
 	if (medkit == true && (sick_hunger >= 1 || sick_thirst >= 1 || sick_health >= 1)) {

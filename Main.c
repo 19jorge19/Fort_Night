@@ -75,13 +75,19 @@ int main() {
 		if (thirst == 0) {
 			modifyhealth(thirsty_damage);
 		}
-
+		//return_items();
 
 		//If health runs out, print losing message and return
 		if (health <= 0) {
-			printf("\n---------\nUh-Oh, you died :(\n");
-			printf("You survived for %d days\n---------\n\n", i);
-			main();
+			if (check_totem() == true) {
+				printf("The totem disappears in a flash of light, and you are saved from death!\n");
+				modifyhealth(50);
+			}
+			else {
+				printf("\n---------\nUh-Oh, you died :(\n");
+				printf("You survived for %d days\n---------\n\n", i);
+				main();
+			}
 		}
 		
 	 }
