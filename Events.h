@@ -8,26 +8,35 @@
 
 
 void morning_event();
-//void midday_event();
+void midday_event();
 //void evening_event();
 void find_food(int, int);
 void find_water(int, int);
 void stay_in(int, int);
+int random_event_set(float);
+
 void bear(bool home);
 void storm(bool home);
+void ants(bool home);
+
 void fever_sick(int random_sick);
 void dysentary_sick(int random_sick);
+
 void dropped_package(bool home);
+
+void sick_counter(int, int, int);
 void sick_health_counter(int sick_health);
 void sick_food_counter(int sick_hunger);
 void sick_water_counter(int sick_thirst);
 void sick_stay_counter(int stay_counter);
+void sick_item_check(bool);
+
 void print_bear();
 void print_storm();
 void choices();
 void status_show(int, int, int);
-int random_event_set(float);
-void sick_item_check(bool);
-void sick_counter(int, int, int);
+
+
+
 
 #endif
