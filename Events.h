@@ -33,6 +33,7 @@ void sick_item_check(bool);
 
 void print_bear();
 void print_storm();
+void print_ant();
 void choices();
 void status_show(int, int, int);
 

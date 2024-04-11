@@ -494,6 +494,7 @@ void ants(bool home) {
 	}else
 
 	printf("You tripped and fell into an anthill of fire ants!\n");
+	print_ant();
 
 	int choice;
 
@@ -765,6 +766,22 @@ void print_storm() {
 		"                    J$F               $$\n"
 		"                    $$               .$F\n"
 		"                   4$\"               $P\"\n\n");
+
+	return;
+}
+
+void print_ant() {
+
+	printf(" \\       /\n");
+	printf("  \\     /\n");
+	printf("   \\.-./ \n");
+	printf("  (o\\^/o)   _   _   _    __\n");
+	printf("   ./ \\. \\ ( )-( )-( ).-'  ' -.\n");
+	printf("    {-} \(//  ||   \\\\ /  ( ))   '-.\n");
+	printf("	 //-__||__.-\\.        .-'\n");
+	printf("	(/    ()     \\)'-._.-'\n");
+	printf("	||    ||      \\ \n");
+	printf("        ('    ('       ')\n");
 
 	return;
 }
