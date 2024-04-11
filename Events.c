@@ -6,13 +6,13 @@ int bear_attack = 1;
 int storm_appear = 2;
 int package_drop = 3;
 int ant_hill = 4;
-double food_chance = 0.5; //50%
-double water_chance = 0.5; //50%
-double bear_chance = 0.2; //20%
-double storm_chance = 0.2; //20%
-double package_chance = 0.08; //8%
-double ants_chance = 0.1;	//10%
-double sick_chance = 80; // Threshold for random_sick to cross
+double food_chance = 0.5;		//50%
+double water_chance = 0.5;		//50%
+double bear_chance = 0.12;		//12%
+double storm_chance = 0.1;		//10%
+double package_chance = 0.08;	//8%
+double ants_chance = 0.1;		//10%
+double sick_chance = 85;		//Threshold for random_sick to cross
 
 bool hatchet = false;
 bool water_bottle = false;
@@ -39,13 +39,11 @@ void morning_event() {
 	scanf("%d", &decision);
 	printf("\n");
 	
-
 	//random chance of storm, other unpredictable event
 	int random_sick = rand() % 100; // random number between 0-99. Any value above 'sick_chance' is sick, while below is not sick
 
 	float r = (float)rand() / (float)RAND_MAX;
 	random_event = random_event_set(r);
-
 
 	//send into different function if there is a storm or other event 
 	if (decision == 0) {
@@ -68,7 +66,11 @@ void morning_event() {
 
 }
 
-//*
+/*
+* Function displays status bars before prompting user to make a decision for what to do during midday
+* User may search for food, search for water, or stay in
+* Chance of random event happening to which function calls other functions based on user decision, and passes what random event happened
+*/
 void midday_event() {
 	int decision;
 	int random_event;
@@ -83,13 +85,11 @@ void midday_event() {
 	scanf("%d", &decision);
 	printf("\n");
 	
-
 	//random chance of storm, other unpredictable event
 	int random_sick = rand() % 100; // random number between 0-99. a value above 90 is sick, below is fine
 
 	float r = (float)rand() / (float)RAND_MAX;
 	random_event = random_event_set(r);
-
 
 	//send into different function if there is a storm or other event 
 	if (decision == 0) {
@@ -109,12 +109,56 @@ void midday_event() {
 		midday_event();
 	}
 	
-
 }
-//*/
 
 /*
-*
+* Function displays status bars before prompting user to make a decision for what to do in the evening
+* User may search for food, search for water, or stay in
+* Chance of random event happening to which function calls other functions based on user decision, and passes what random event happened
+*/
+void evening_event() {
+	int decision;
+	int random_event;
+	//print statuses
+	printf("Evening Event %d \n", day_count);
+	status_show(health, hunger, thirst);
+	sick_item_check(medkit);
+
+	//print to screen user decision, go find food, find water, or stay here
+	choices();
+
+	scanf("%d", &decision);
+	printf("\n");
+
+	//random chance of storm, other unpredictable event
+	int random_sick = rand() % 100; // random number between 0-99. a value above 90 is sick, below is fine
+
+	float r = (float)rand() / (float)RAND_MAX;
+	random_event = random_event_set(r);
+
+	//send into different function if there is a storm or other event 
+	if (decision == 0) {
+		find_food(random_event, random_sick);
+		return;
+	}
+	else if (decision == 1) {
+		find_water(random_event, random_sick);
+		return;
+	}
+	else if (decision == 2) {
+		stay_in(random_event, stay_count);
+		return;
+	}
+	else {
+		printf("Please choose a decision\n");
+		midday_event();
+	}
+
+}
+
+/*
+*	Takes in a float value between 0 and 1, and then compares it to
+*	the percent chance for events, and returns an integer value
 *
 */
 int random_event_set(float r) {
@@ -493,7 +537,7 @@ void ants(bool home) {
 		return;
 	}else
 
-	printf("You tripped and fell into an anthill of fire ants!\n");
+	printf("You tripped and fell into an anthill of fire ants!\n\n");
 	print_ant();
 
 	int choice;
@@ -561,7 +605,6 @@ void ants(bool home) {
 	return;
 }
 
-
 /*	
 *	Event determining if a package has dropped, which may contain an item or food
 *	Package cannot be collected if 'stay at home' option is chosen
@@ -618,88 +661,6 @@ void dropped_package(bool home) {
 			}
 
 		}
-	}
-	return;
-}
-
-/*
-*	Checks to see if you are meant to lose health due to sickness
-*	Continually decreases counter, and only decreases health if 'sick_health' value is greater than 1.
-*/
-void sick_health_counter(int sick_health){
-	if (sick_health > 1){
-		modifyhealth(-5);
-	}
-	else if(sick_health == 1){
-		printf("You are no longer losing extra health due to sickness!\n");
-		
-	}
-
-	if (sick_health > 0) {
-		sick_health--;
-	}
-	else
-		sick_health = 0;
-}
-
-/*
-*	Checks to see if you are meant to lose hunger due to sickness
-*	Continually decreases counter, and only decreases hunger if 'sick_hunger' value is greater than 1.
-*/
-void sick_food_counter(int sick_hunger){
-	if (sick_hunger > 1){
-		modifyhunger(-5);
-	}
-	else if(sick_hunger == 1){
-		printf("You are no longer losing extra hunger due to sickness!\n");
-	}
-
-	if (sick_hunger > 0) {
-		sick_hunger--;
-	}
-	else
-		sick_hunger = 0;
-}
-
-void sick_counter(int sick_health, int sick_hunger, int sick_thirst) {
-	int h = sick_health;
-	int u = sick_hunger;
-	int t = sick_thirst;
-	sick_health_counter(sick_health);
-	sick_food_counter(sick_hunger);
-	sick_water_counter(sick_thirst);
-
-	if (sick_health <= h && sick_hunger <= u && sick_thirst <= t) {
-		if (h == 1 || u == 1 || t == 1) {
-			printf("You are no longer sick!\n");
-		}
-	}
-}
-
-/*
-*	Checks to see if you are meant to lose thirst due to sickness
-*	Continually decreases counter, and only decreases health if 'sick_thirst' value is greater than 1.
-*/
-void sick_water_counter(int sick_thirst){
-	if (sick_thirst > 1){
-		modifythirst(-5);
-	}
-	else if(sick_thirst == 1) {
-		printf("You are no longer losing extra thrist due to sickness!\n");
-	}
-
-	if (sick_thirst > 0) {
-		sick_thirst--;
-	}
-	else
-		sick_thirst = 0;
-}
-
-void sick_stay_counter(int stay_counter) {
-	if (stay_counter > 5) {
-		printf("You have stayed in for too long, and have gotten sick!\n");
-		sick_hunger = 4;
-		stay_counter = 1;
 	}
 	return;
 }
@@ -781,7 +742,7 @@ void print_ant() {
 	printf("	 //-__||__.-\\.        .-'\n");
 	printf("	(/    ()     \\)'-._.-'\n");
 	printf("	||    ||      \\ \n");
-	printf("        ('    ('       ')\n");
+	printf("        ('    ('       ')\n\n");
 
 	return;
 }
@@ -806,8 +767,6 @@ printf("Thirst: %d\n\n", thirst);
 
 	return;
 }
-
-
 
 void sick_item_check(bool medkit) {
 
