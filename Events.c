@@ -6,12 +6,14 @@ int bear_attack = 1;
 int storm_appear = 2;
 int package_drop = 3;
 int ant_hill = 4;
+int find_ruins = 5;
 double food_chance = 0.5;		//50%
 double water_chance = 0.5;		//50%
 double bear_chance = 0.12;		//12%
 double storm_chance = 0.1;		//10%
 double package_chance = 0.08;	//8%
 double ants_chance = 0.1;		//10%
+double ruins_chance = 0.01;		// 1%
 double sick_chance = 85;		//Threshold for random_sick to cross
 
 bool hatchet = false;
@@ -20,14 +22,6 @@ bool medkit = false;
 bool backpack = false;
 bool totem = false; // can change name 
 
-bool check_totem() {
-	if (totem == true) {
-		return true;
-	}
-	else if (totem == false) {
-		return false;
-	}
-}
 
 /*
 * Function displays status bars before prompting user to make a decision for what to do in the morning
@@ -190,6 +184,10 @@ int random_event_set(float r) {
 		//ants
 		random_event = 4;
 	}
+	else if (r <= bear_chance + storm_chance + package_chance + ants_chance + ruins_chance) {
+		//ruins
+		random_event = 5;
+	}
 	else {
 		//normal
 		random_event = 0;
@@ -223,6 +221,10 @@ void find_food(int random_event, int random_sick) {
 	else if (random_event == ant_hill) {
 		// Anthill
 		ants(false);
+	}
+	else if (random_event == find_ruins) {
+		//Ruins
+		ruins(false);
 	}
 	//if random number is not in those ranges, it's a normal case
 	//additionally, if we want normal case to run through no matter what, we can remove else statement
@@ -281,6 +283,10 @@ void find_water(int random_event, int random_sick) {
 	else if (random_event == ant_hill) {
 		// Anthill
 		ants(false);
+	}
+	else if (random_event == find_ruins) {
+		//Ruins
+		ruins(false);
 	}
 	//if random number is not in those ranges, it's a normal case
 	//additionally, if we want normal case to run through no matter what, we can remove else statement
@@ -341,7 +347,12 @@ void stay_in(int random_event, int stay_count) {
 	}
 	else if (random_event == ant_hill) {
 		// Anthill
-		ants(false);
+		ants(true);
+		sick_stay_counter(stay_count);
+	}
+	else if (random_event == find_ruins) {
+		//Ruins
+		ruins(true);
 		sick_stay_counter(stay_count);
 	}
 	else {
@@ -548,7 +559,7 @@ return;
 */
 void ants(bool home) {
 
-	if (home) {
+	if (home == true) {
 		return;
 	}else
 
@@ -620,6 +631,87 @@ void ants(bool home) {
 	return;
 }
 
+void ruins(bool home) {
+
+	if (home == true) {
+		return;
+	}
+	else
+
+		printf("You have stumbled upon a site of ancient ruins!\n\n");
+	//print_ruins();
+
+	int choice;
+
+	printf("What would you like to do?\n");
+	printf("0: Ignore the ruins ");
+	printf("| 1: Cautiously explore them ");
+	printf("| 2: Boldly explore them\n");
+
+	scanf("%d", &choice);
+	printf("\n");
+
+	//initializing chances of success
+	double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
+	double ignore = 0.95;			//chance of ignoring the ruins and taking no damage = 95%
+	double caution = 0.6;       //chance of exploring cautiously and not taking damage = 60%
+	double bold = 0.3;			//chance of exploring boldly and not taking damage = 30%
+	//initializing what you get for each scenario
+	int ignore_damage = -1;
+	int caution_damage = -10;
+	int bold_damage = -30;
+
+	if (choice == 0) {
+		if (r <= ignore) {
+			//success
+			printf("You turn around and walk away from the ruins. \n\n");
+		}
+		else {
+			//failure
+			printf("You turn around and walk away from the ruins, but you stub your toe on a pebble. \n\n");
+			printf("Health deducted by %d\n\n", abs(ignore_damage));
+			modifyhealth(ignore_damage);
+		}
+	}
+	else if (choice == 1) {
+		if (r <= caution) {
+			//success
+			printf("You cautiously explore the ruins, and find an odd artifact!\n\n");
+			if (totem == true) {
+				printf("It was another strange totem, but it falls apart when you go to grab it. Strange...\n\n");
+			}
+			else {
+				totem = true;
+				printf("It was a strange looking totem!\nIt feels like it could keep you alive somehow...\n\n");
+			}
+		}
+		else {
+			//failure
+			printf("You cautiously explore the ruins, but trigger a hidden trap!\nLuckily, you are only scraped by a spike in the wall!\n\n");
+			printf("Health deducted by %d\n\n", abs(caution_damage));
+			modifyhealth(caution_damage);
+		}
+	}
+	else if (choice == 2) {
+		if (r <= bold) {
+			//success
+			printf("You boldly explore the ruins!\n\n");
+		}
+		else {
+			//failure
+			printf("You boldly explore the ruins, but trigger a hidden trap!!\nYou didn't notice until too late, and are wounded!\n\n");
+			printf("Health deducted by %d\n\n", abs(bold_damage));
+			modifyhealth(bold_damage);
+		}
+	}
+	else {
+		printf("Please make a valid choice.\n\n");
+		ruins(home);
+	}
+
+	return;
+}
+
 /*	
 *	Event determining if a package has dropped, which may contain an item or food
 *	Package cannot be collected if 'stay at home' option is chosen
@@ -636,7 +728,7 @@ void dropped_package(bool home) {
 	else {
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 		if (r <= 0.25) {
-			if (hatchet == false) {
+			if (hatchet == true) {
 				printf("You found some canned food in the package!\n");
 				modifyhunger(25);
 			}
@@ -646,7 +738,7 @@ void dropped_package(bool home) {
 			}
 		}
 		else if (0.25 < r <= 0.5) {
-			if (backpack == false) {
+			if (backpack == true) {
 				printf("You found some canned food in the package!\n");
 				modifyhunger(25);
 			}
@@ -656,7 +748,7 @@ void dropped_package(bool home) {
 			}
 		}
 		else if (0.5 < r <= 0.75) {
-			if (water_bottle == false) {
+			if (water_bottle == true) {
 				printf("You found some canned food in the package!\n");
 				modifyhunger(25);
 			}
@@ -666,7 +758,7 @@ void dropped_package(bool home) {
 			}
 		}
 		else if (0.75 < r <= 1) {
-			if (medkit == false) {
+			if (medkit == true) {
 				printf("You found some canned food in the package!\n");
 				modifyhunger(25);
 			}
@@ -678,6 +770,15 @@ void dropped_package(bool home) {
 		}
 	}
 	return;
+}
+
+bool check_totem() {
+	if (totem == true) {
+		return true;
+	}
+	else if (totem == false) {
+		return false;
+	}
 }
 
 /*

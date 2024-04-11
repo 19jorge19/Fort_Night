@@ -9,7 +9,7 @@ bool hatchet();
 bool water_bottle();
 bool medkit();
 bool backpack();
-
+bool totem();
 
 
 

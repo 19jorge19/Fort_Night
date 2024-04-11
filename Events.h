@@ -18,6 +18,7 @@ int random_event_set(float);
 void bear(bool home);
 void storm(bool home);
 void ants(bool home);
+void ruins(bool home);
 
 void fever_sick(int random_sick);
 void dysentary_sick(int random_sick);
