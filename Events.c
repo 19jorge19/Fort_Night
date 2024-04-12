@@ -22,6 +22,12 @@ bool medkit = false;
 bool backpack = false;
 bool totem = false; // can change name 
 
+int bear_event = 0;
+int storm_event = 0;
+int package_event = 0;
+int ants_event = 0;
+int ruins_event = 0;
+
 
 /*
 * Function displays status bars before prompting user to make a decision for what to do in the morning
@@ -167,33 +173,86 @@ void evening_event() {
 */
 int random_event_set(float r) {
 	int random_event = 0;
+	float new_rand = (float)rand() / (float)RAND_MAX;
 
 	if (r <= bear_chance) {
 		//bear attack
-		random_event = 1;
+		if (bear_event <= 1) {
+			random_event = 1;
+			bear_event += 2;
+			reduce_event_count();
+		}
+		else {
+			random_event_set(new_rand);
+		}
 	}
 	else if (r <= bear_chance + storm_chance) {
 		//storm
-		random_event = 2;
+		if (storm_event <= 1) {
+			random_event = 2;
+			storm_event += 2;
+			reduce_event_count();
+		}
+		else {
+			random_event_set(new_rand);
+		}
+		//random_event = 2;
 	}
 	else if (r <= bear_chance + storm_chance + package_chance) {
 		//package
-		random_event = 3;
+		if (package_event <= 1) {
+			random_event = 3;
+			package_event += 2;
+			reduce_event_count();
+		}
+		else {
+			random_event_set(new_rand);
+		}
+		//random_event = 3;
 	}
 	else if (r <= bear_chance + storm_chance + package_chance + ants_chance) {
 		//ants
-		random_event = 4;
+		if (ants_event <=1) {
+			random_event = 4;
+			ants_event += 2;
+			reduce_event_count();
+		}
+		else {
+			random_event_set(new_rand);
+		}
+		//random_event = 4;
 	}
 	else if (r <= bear_chance + storm_chance + package_chance + ants_chance + ruins_chance) {
 		//ruins
-		random_event = 5;
+		if (ruins_event <= 1) {
+			random_event = 5;
+
+			ruins_event += 2;
+			reduce_event_count();
+		}
+		else {
+			random_event_set(new_rand);
+		}
+		//random_event = 5;
 	}
 	else {
 		//normal
 		random_event = 0;
+		reduce_event_count();
 	}
 
 	return random_event;
+}
+
+void reduce_event_count() {
+
+	bear_event--;
+	storm_event--;
+	package_event--;
+	ants_event--;
+	ruins_event--;
+
+	return;
 }
 
 
@@ -771,6 +830,19 @@ void dropped_package(bool home) {
 	}
 	return;
 }
+
+float event_repeat_check(int event_check, int event_) {
+
+	float new_rand = (float)rand() / (float)RAND_MAX;
+
+	if (event_check > 1) {
+		return new_rand;
+	}
+	else {
+		return event_;
+	}
+}
+
 
 bool check_totem() {
 	if (totem == true) {

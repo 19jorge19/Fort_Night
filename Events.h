@@ -34,6 +34,8 @@ void choices();
 void status_show(int, int, int);
 
 bool check_totem();
+float event_repeat_check(int, int);
+void reduce_event_count();
 
 
 #endif
