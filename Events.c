@@ -14,7 +14,7 @@ double storm_chance = 0.1;		//10%
 double package_chance = 0.08;	//8%
 double ants_chance = 0.1;		//10%
 double ruins_chance = 0.01;		// 1%
-double sick_chance = 85;		//Threshold for random_sick to cross
+double sick_chance = 90;		//Threshold for random_sick to cross
 
 bool hatchet = false;
 bool water_bottle = false;
@@ -37,6 +37,10 @@ int ruins_event = 0;
 void morning_event() {
 	int decision;
 	int random_event;
+
+	if (health == 0) {
+		return;
+	}
 
 	printf("\nMorning Event %d \n", day_count);
 	//print statuses
@@ -88,6 +92,11 @@ void morning_event() {
 void midday_event() {
 	int decision;
 	int random_event;
+
+	if (health == 0) {
+		return;
+	}
+
 	//print statuses
 	printf("Midday Event %d \n", day_count);
 	status_show(health, hunger, thirst);
@@ -137,6 +146,11 @@ void midday_event() {
 void evening_event() {
 	int decision;
 	int random_event;
+
+	if (health == 0) {
+		return;
+	}
+
 	//print statuses
 	printf("Evening Event %d \n", day_count);
 	status_show(health, hunger, thirst);
@@ -983,22 +997,29 @@ printf("Thirst: %d\n\n", thirst);
 
 void inventory() {
 
+	int number = 1;
+
 	printf("Inventory: \n");
 
 	if (totem == true) {
-		printf("\tTotem\n");
+		printf("\t%i) Totem\n", number);
+		number++;
 	}
 	if (water_bottle == true) {
-		printf("\tWater Bottle\n");
+		printf("\%i) tWater Bottle\n", number);
+		number++;
 	}
 	if (hatchet== true) {
-		printf("\tHatchet\n");
+		printf("\t%i) Hatchet\n", number);
+		number++;
 	}
 	if (backpack== true) {
-		printf("\tBackpack\n");
+		printf("\t%i) Backpack\n", number);
+		number++;
 	}
 	if (medkit== true) {
-		printf("\tMedkit\n");
+		printf("\t%i) Medkit\n", number);
+		number++;
 	}
 	if (totem == false && medkit == false && hatchet == false && water_bottle == false && backpack == false) {
 		printf("\tInventory is empty\n");
