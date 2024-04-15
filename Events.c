@@ -69,6 +69,10 @@ void morning_event() {
 		stay_in(random_event, stay_count);
 		return;
 	}
+	else if (decision == 3) {
+		inventory();
+		morning_event();
+	}
 	else {
 		printf("Please choose a decision\n");
 		morning_event();
@@ -114,6 +118,10 @@ void midday_event() {
 		stay_in(random_event, stay_count);
 		return;
 	}
+	else if (decision == 3) {
+		inventory();
+		midday_event();
+	}
 	else {
 		printf("Please choose a decision\n");
 		midday_event();
@@ -158,6 +166,10 @@ void evening_event() {
 	else if (decision == 2) {
 		stay_in(random_event, stay_count);
 		return;
+	}
+	else if (decision == 3) {
+		inventory();
+		evening_event();
 	}
 	else {
 		printf("Please choose a decision\n");
@@ -949,7 +961,8 @@ void choices(){
 	printf("Make a decision: \n");
 	printf("0: Search for food ");
 	printf("| 1: Search for water ");
-	printf("| 2: Stay in\n");
+	printf("| 2: Stay in ");
+	printf("| 3: Check Inventory \n");
 
 	return;
 
@@ -967,6 +980,32 @@ printf("Thirst: %d\n\n", thirst);
 
 	return;
 }
+
+void inventory() {
+
+	printf("Inventory: \n");
+
+	if (totem == true) {
+		printf("\tTotem\n");
+	}
+	if (water_bottle == true) {
+		printf("\tWater Bottle\n");
+	}
+	if (hatchet== true) {
+		printf("\tHatchet\n");
+	}
+	if (backpack== true) {
+		printf("\tBackpack\n");
+	}
+	if (medkit== true) {
+		printf("\tMedkit\n");
+	}
+	if (totem == false && medkit == false && hatchet == false && water_bottle == false && backpack == false) {
+		printf("\tInventory is empty\n");
+	}
+	return;
+}
+
 
 /*
 * Checks to see if there is a healthkit and the plaer is sick. CUres them of sickness if both are true

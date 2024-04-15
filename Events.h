@@ -37,5 +37,7 @@ bool check_totem();
 float event_repeat_check(int, int);
 void reduce_event_count();
 
+void inventory();
+
 
 #endif
