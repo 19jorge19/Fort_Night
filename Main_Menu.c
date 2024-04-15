@@ -42,7 +42,7 @@ void main_menu()
         //write out credits
         printf("Developers:\n");
         printf("Dylan\nJorge\nJosh\nMax\nXavier\n\n");
-        printf("The contents of this game are a parody, and fall under Title 17 U.S.C. Section 107 of fair use.\n");
+        printf("The contents of this game are a parody, and fall under Title 17 U.S.C. Section 107 of fair use.\n\n");
         main_menu();
     }
     else {

@@ -39,7 +39,12 @@ void morning_event() {
 	int random_event;
 
 	if (health == 0) {
-		return;
+		if (check_totem() == true) {
+			printf("The totem disappears in a flash of light, and you are saved from death!\n");
+			modifyhealth(50);
+		}
+		else
+			return;
 	}
 
 	printf("\nMorning Event %d \n", day_count);
@@ -94,7 +99,11 @@ void midday_event() {
 	int random_event;
 
 	if (health == 0) {
-		return;
+		if (check_totem() == true) {
+			printf("The totem disappears in a flash of light, and you are saved from death!\n");
+			modifyhealth(50);
+		}else
+			return;
 	}
 
 	//print statuses
@@ -148,7 +157,11 @@ void evening_event() {
 	int random_event;
 
 	if (health == 0) {
-		return;
+		if (check_totem() == true) {
+			printf("The totem disappears in a flash of light, and you are saved from death!\n");
+			modifyhealth(50);
+		}else
+			return;
 	}
 
 	//print statuses
