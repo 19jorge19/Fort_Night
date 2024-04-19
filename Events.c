@@ -9,11 +9,11 @@ int ant_hill = 4;
 int find_ruins = 5;
 double food_chance = 0.5;		//50%
 double water_chance = 0.5;		//50%
-double bear_chance = 0.12;		//12%
-double storm_chance = 0.1;		//10%
-double package_chance = 0.08;	//8%
-double ants_chance = 0.1;		//10%
-double ruins_chance = 0.01;		// 1%
+double bear_chance = 0.14;		//14%
+double storm_chance = 0.14;		//14%
+double package_chance = 0.08;	// 8%
+double ants_chance = 0.12;		//12%
+double ruins_chance = 0.02;		// 2%
 double sick_chance = 90;		//Threshold for random_sick to cross
 
 bool hatchet = false;
@@ -30,9 +30,9 @@ int ruins_event = 0;
 
 
 /*
-* Function displays status bars before prompting user to make a decision for what to do in the morning
-* User may search for food, search for water, or stay in
-* Chance of random event happening to which function calls other functions based on user decision, and passes what random event happened
+*	Function displays status bars before prompting user to make a decision for what to do in the morning
+*	User may search for food, search for water, or stay in
+*	Chance of random event happening to which function calls other functions based on user decision, and passes what random event happened
 */
 void morning_event() {
 	int decision;
@@ -90,9 +90,9 @@ void morning_event() {
 }
 
 /*
-* Function displays status bars before prompting user to make a decision for what to do during midday
-* User may search for food, search for water, or stay in
-* Chance of random event happening to which function calls other functions based on user decision, and passes what random event happened
+*	Function displays status bars before prompting user to make a decision for what to do during midday
+*	User may search for food, search for water, or stay in
+*	Chance of random event happening to which function calls other functions based on user decision, and passes what random event happened
 */
 void midday_event() {
 	int decision;
@@ -148,9 +148,9 @@ void midday_event() {
 }
 
 /*
-* Function displays status bars before prompting user to make a decision for what to do in the evening
-* User may search for food, search for water, or stay in
-* Chance of random event happening to which function calls other functions based on user decision, and passes what random event happened
+*	Function displays status bars before prompting user to make a decision for what to do in the evening
+*	User may search for food, search for water, or stay in
+*	Chance of random event happening to which function calls other functions based on user decision, and passes what random event happened
 */
 void evening_event() {
 	int decision;
@@ -296,9 +296,9 @@ void reduce_event_count() {
 
 
 /*
-* Function takes in random_event number
-* If random event is in certain ranges, triggers bear or storm events
-* If not, function provides user with food based on chance defined by food_chance variable
+*	Function takes in random_event number
+*	If random event is in certain ranges, triggers bear or storm events
+*	If not, function provides user with food based on chance defined by food_chance variable
 */
 void find_food(int random_event, int random_sick) {
 	int food_found = 45;
@@ -324,9 +324,11 @@ void find_food(int random_event, int random_sick) {
 		//Ruins
 		ruins(false);
 	}
-	//if random number is not in those ranges, it's a normal case
-	//additionally, if we want normal case to run through no matter what, we can remove else statement
-	//else {
+	/*
+	if random number is not in those ranges, it's a normal case
+	additionally, if we want normal case to run through no matter what, we can remove else statement
+	*/
+	else {
 		//normal case
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 
@@ -353,7 +355,7 @@ void find_food(int random_event, int random_sick) {
 			//additionally, can decrease hunger if we want, for wasting energy not finding food
 			//additionally, can modify food chance to increase
 		}
-	//}
+	}
 	return;
 }
 
@@ -386,9 +388,12 @@ void find_water(int random_event, int random_sick) {
 		//Ruins
 		ruins(false);
 	}
-	//if random number is not in those ranges, it's a normal case
-	//additionally, if we want normal case to run through no matter what, we can remove else statement
-	//else {
+
+	/*
+	if random number is not in those ranges, it's a normal case
+	additionally, if we want normal case to run through no matter what, we can remove else statement
+	*/
+	else {
 		//normal case
 		double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 
@@ -415,14 +420,14 @@ void find_water(int random_event, int random_sick) {
 			//additionally, can decrease thirst if we want, for wasting energy not finding food
 			//additionally, can modify food chance to increase
 		}
-	//}
+	}
 	return;
 }
 
 /*
-* function called if user decides to stay in
-* takes in random event integer and calls bear or storm if event occurs
-* if event does not occur, nothing happens 
+*	Function called if user decides to stay in
+*	takes in random event integer and calls bear or storm if event occurs
+*	if event does not occur, nothing happens 
 */
 void stay_in(int random_event, int stay_count) {
 
@@ -462,9 +467,9 @@ void stay_in(int random_event, int stay_count) {
 }
 
 /*
-* Function is called if there is a bear attack
-* gives options to run away, fight, or play dead
-* constants for chances as well as damages for each case located in function
+*	Function is called if there is a bear attack
+*	gives options to run away, fight, or play dead
+*	constants for chances as well as damages for each case located in function
 */
 void bear(bool home) {
 	printf("Oh no! A bear appeared!\n\n");
@@ -489,7 +494,7 @@ void bear(bool home) {
 	double run_away = 0.3;	    //chance of runing away 30%
 	double fight_hatchet = 0.5; //chance of beating with hatchet = 50%
 	double fight = 0.1;         //chance of beating it in a fight 10%
-	double play_dead = 0.7;    //chance of playing dead and it leaving you alone 70%
+	double play_dead = 0.7;     //chance of playing dead and it leaving you alone 70%
 
 	//initializing what you get for each scenario
 	int running_attack = -30;
@@ -555,10 +560,10 @@ void bear(bool home) {
 }
 
 /*
-* Function is called if user is caught in storm
-* takes in boolean of their decision to stay home or not
-* if they stayed home nothing happens, if not they make a choice to ignore the storm take shelter nearby or try to find a cave
-* constants for liklihood of events as well as event damage located in function
+*	Function is called if user is caught in storm
+*	takes in boolean of their decision to stay home or not
+*	if they stayed home nothing happens, if not they make a choice to ignore the storm take shelter nearby or try to find a cave
+*	constants for liklihood of events as well as event damage located in function
 */
 void storm(bool home) {
 	printf("Oh no! A storm is rolling in!\n");
@@ -591,8 +596,8 @@ printf("\n");
 //initializing chances of success
 double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
 double ignore = 0.2;	//chance of ignoring it successfully 20%
-double shelter = 0.95;		//chance of finding shelter 95%
-double cave = 0.4;  //chance of finding a cave 40%
+double shelter = 0.95;	//chance of finding shelter 95%
+double cave = 0.4;		//chance of finding a cave 40%
 
 //initializing what you get for each scenario
 int ignore_damage = -30;
@@ -651,9 +656,9 @@ return;
 }
 
 /*
-* Function is called if the user falls into an ant hill
-* Checks to see if the user is home or not, and gives the player options on what to do
-* if they are not at home/shelter
+*	Function is called if the user falls into an ant hill
+*	Checks to see if the user is home or not, and gives the player options on what to do
+*	if they are not at home/shelter
 */
 void ants(bool home) {
 
@@ -751,9 +756,10 @@ void ruins(bool home) {
 
 	//initializing chances of success
 	double r = (double)rand() / RAND_MAX; //generate random number between 0 and 1
-	double ignore = 0.95;			//chance of ignoring the ruins and taking no damage = 95%
+	double ignore = 0.95;		//chance of ignoring the ruins and taking no damage = 95%
 	double caution = 0.6;       //chance of exploring cautiously and not taking damage = 60%
 	double bold = 0.3;			//chance of exploring boldly and not taking damage = 30%
+	int ruin_water = 30, ruin_food = 30;
 	//initializing what you get for each scenario
 	int ignore_damage = -1;
 	int caution_damage = -10;
@@ -793,7 +799,10 @@ void ruins(bool home) {
 	else if (choice == 2) {
 		if (r <= bold) {
 			//success
-			printf("You boldly explore the ruins!\n\n");
+			printf("You boldly explore the ruins, and find a store of preserve food and water!\n\n");
+			printf("Food and water restored by 30 each!\n\n");
+			modifyhunger(ruin_food);
+			modifythirst(ruin_water);
 		}
 		else {
 			//failure
@@ -893,7 +902,7 @@ bool check_totem() {
 }
 
 /*
-* Prints out ASCII art of a bear
+*	Prints out ASCII art of a bear
 */
 void print_bear() {
 
@@ -919,7 +928,7 @@ void print_bear() {
 }
 
 /*
-* Prints out ASCII art of a stormcloud
+*	 Prints out ASCII art of a stormcloud
 */
 void print_storm() {
 
@@ -965,7 +974,7 @@ void print_storm() {
 }
 
 /*
-* Prints out ASCII art of an ant
+*	Prints out ASCII art of an ant
 */
 void print_ant() {
 
@@ -996,7 +1005,7 @@ void choices(){
 }
 
 /*
-* Prints out the current values for health, hunger, and thirst
+*	Prints out the current values for health, hunger, and thirst
 */
 void status_show(int health, int hunger, int thirst) {
 
@@ -1042,7 +1051,7 @@ void inventory() {
 
 
 /*
-* Checks to see if there is a healthkit and the plaer is sick. CUres them of sickness if both are true
+*	Checks to see if there is a healthkit and the plaer is sick. CUres them of sickness if both are true
 */
 void sick_item_check(bool medkit) {
 

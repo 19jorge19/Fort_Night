@@ -105,6 +105,9 @@ void sick_water_counter(int sick_thirst) {
 		sick_thirst = 0;
 }
 
+/*
+*	Runs the sick counters for all status bars, and checks to see if you are meant to stay sick overall
+*/
 void sick_counter(int sick_health, int sick_hunger, int sick_thirst) {
 	int h = sick_health;
 	int u = sick_hunger;
@@ -120,6 +123,9 @@ void sick_counter(int sick_health, int sick_hunger, int sick_thirst) {
 	}
 }
 
+/*
+*	Counts  the number of days you stay in, and makes you sick after 5 days 
+*/
 void sick_stay_counter(int stay_counter) {
 	if (stay_counter > 5) {
 		printf("You have stayed in for too long, and have gotten sick!\n");
