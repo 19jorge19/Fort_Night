@@ -992,6 +992,16 @@ void print_ant() {
 	return;
 }
 
+/*
+*	Prints out ASCII art of ruins
+*/
+void print_ruins() {
+
+	printf("ADD RUINS ASCII ART HERE\n");
+
+	return;
+}
+
 void choices(){
 
 	printf("Make a decision: \n");
