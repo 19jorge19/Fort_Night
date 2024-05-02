@@ -21,11 +21,12 @@ int daily_hunger = -15;		//	Decrease in hunger after every day
 int daily_thirst = -15;		//	Decrease in thirst after every day
 
 int main() {
+
+	main_menu();
+
 	health = 100;
 	thirst = 100;
 	hunger = 100;
-
-	main_menu();
 
 	printf("Welcome to Fortnight! You have awoken in a forest with no memories, \nall you know is that you must survive for 14 days before you are rescued. Can you survive?\n\n\n");
 	printf("       /\\        /\\      \n");
@@ -55,18 +56,15 @@ int main() {
 		day_count = i;
 		printf("\n| Day #%d | \n", i);
 		//status_show(health, hunger, thirst);
-		
-		//daily hunger and thirst decrements
-		modifyhunger(daily_hunger);
-		modifythirst(daily_thirst);
-		sick_counter(sick_health, sick_hunger, sick_thirst);
-		//sick_health_counter(sick_health);
-		//sick_food_counter(sick_hunger);
-		//sick_water_counter(sick_thirst);
 
 		morning_event();
 		midday_event();
 		//evening_event();
+
+		//daily hunger and thirst decrements
+		modifyhunger(daily_hunger);
+		modifythirst(daily_thirst);
+		sick_counter(sick_health, sick_hunger, sick_thirst);
 
 		//if hungry or thirsty, decrement health by appropraite amounts
 		if (hunger == 0) {
