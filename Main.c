@@ -12,7 +12,6 @@ int sick_health = 0;
 int stay_count = 1;
 int day_count = 0;
 
-
 int days = 14;	//	Days required to beat the game
 
 int hungry_damage = -15;	//	Decrease in health if hunger is zero
